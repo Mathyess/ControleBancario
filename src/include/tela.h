@@ -3,7 +3,7 @@
 
 #include <windows.h>
 
-void tela();
-void gotoxy(int x, int y);
+tela();
+gotoxy();
 
 #endif
