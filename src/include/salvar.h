@@ -1,7 +1,7 @@
 #ifndef SALVAR_H
 #define SALVAR_H
 
-carregar();
-Salvar();
+void carregar();
+void Salvar();
 
 #endif

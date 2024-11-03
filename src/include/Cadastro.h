@@ -1,22 +1,22 @@
 #ifndef CADASTRO_H
 #define CADASTRO_H
 
-tela_clie();
-limpa_tela();
-ordena_codigo();
-ordena_nome();
-leitura();
-mostra_cliente();
-cadastrar();
-consultar_cliente();
-consultar();
-cad_inicio();
-cad_posicao();
-remove_final();
-remove_posicao();
-remove_inicio();
-consulta_todos();
-altera_cliente();
-menu_consultar();
+void tela_clie();
+void limpa_tela();
+void ordena_codigo();
+void ordena_nome();
+void leitura();
+void mostra_cliente();
+void cadastrar();
+void consultar_cliente();
+void consultar();
+void cad_inicio();
+void cad_posicao();
+void remove_final();
+void remove_posicao();
+void remove_inicio();
+void consulta_todos();
+void altera_cliente();
+void menu_consultar();
 
 #endif // CADASTRO_H
