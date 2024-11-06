@@ -1,0 +1,37 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compilar e Executar C",
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                "-g",
+                "${workspaceFolder}/*.c",
+                "-o",
+                "${workspaceFolder}/output/bancario"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"],
+            "detail": "Tarefa gerada pelo usuário."
+        },
+        {
+            "label": "Executar Programa",
+            "type": "shell",
+            "command": "${workspaceFolder}/output/bancario",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            }
+        }
+    ]
+}
