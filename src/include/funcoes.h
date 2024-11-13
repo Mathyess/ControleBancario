@@ -1,0 +1,69 @@
+#ifndef FUNCOES_H
+#define FUNCOES_H
+
+//Declaracao das funcoes
+
+void cadastro_conta();
+
+void gotoxy(int x, int y);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#endif // FUNCOES_H
