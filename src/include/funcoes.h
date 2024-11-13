@@ -18,62 +18,10 @@ void remove_inicio();
 void consulta_todos();
 void altera_cliente();
 void menu_consultar();
-
-#endif // FUNCOES_H
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+void tela();
+void gotoxy();
+void carregar();
+void Salvar();
 
 
 

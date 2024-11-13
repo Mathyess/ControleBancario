@@ -1,7 +1,7 @@
-#ifndef GOTOXY_H
-#define GOTOXY_H
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
 
-// Funcao para posicionar o cursor em um determinado ponto da Tela
 void gotoxy(int x, int y)
 {
     COORD coord;
@@ -9,5 +9,3 @@ void gotoxy(int x, int y)
     coord.Y = (short)y;
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
-
-#endif // GOTOXY_H

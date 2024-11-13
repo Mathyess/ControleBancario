@@ -1,12 +1,15 @@
 /*  Autor.....: Matheus Alende
-    Data......: 24/10/2024
-    Objetivo..: Criar a estrutura da tela
+    Data......: 30/10/2024
+    Equipe....: RA membro 1 168649-2024
+                RA membro 2 179381-2024
+    Objetivo..: Tela padrao
 */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
 #include <windows.h>
+#include "include/funcoes.h"
 
 // Mostra a Tela Padrao
 void tela()

@@ -1,5 +1,0 @@
-#ifndef ESTRUTURADADOS_H
-#define ESTRUTURADADOS_H
-
-
-#endif

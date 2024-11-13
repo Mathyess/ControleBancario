@@ -1,8 +1,17 @@
+/*  Autor.....: Matheus Alende
+    Data......: 30/10/2024
+    Equipe....: RA membro 1 168649-2024
+                RA membro 2 179381-2024
+
+    Objetivo..: Salva os dados do sistema
+*/
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <windows.h>
 #include <conio.h>
+#include "include/funcoes.h"
 
 void carregar(TipoLista *L) {
     FILE *ptr = fopen("Clientes.dat", "rb");

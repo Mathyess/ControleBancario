@@ -1,13 +1,18 @@
+/*  Autor.....: Matheus Alende, Pedro Henrique
+    Data......: 30/10/2024
+    Equipe....: RA membro 1 168649-2024
+                RA membro 2 179381-2024
+
+    Objetivo..: Programa principal
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
 #include <windows.h>
 #include <string.h>
-#include "include/menu.h"
-#include "include/tela.h"
-#include "include/Cadastro.h"
-#include "include/EstruturaDados.h"
-#include "include/salvar.h"
+#include "include/funcoes.h"
+
 
 // Função para a Tela Inicial
 void menu_inicial() {
