@@ -4,6 +4,7 @@
 #include <windows.h>
 #include <conio.h>
 #include "include/funcoes.h"
+#include "include/gotoxy.h"
 void leitura(reg_cliente *reg_clie)
 {
     strcpy(reg_clie->nm_cliente, le_nm_nome());

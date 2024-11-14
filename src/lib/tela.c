@@ -10,6 +10,7 @@
 #include <conio.h>
 #include <windows.h>
 #include "include/funcoes.h"
+#include "include/gotoxy.h"
 
 // Mostra a Tela Padrao
 void tela()

@@ -3,6 +3,7 @@
 #include <windows.h>
 #include <conio.h>
 #include "include/funcoes.h"
+#include "include/gotoxy.h"
 void consulta_todos(TipoLista *L, char msg[40])
 {
     TipoApontador p;

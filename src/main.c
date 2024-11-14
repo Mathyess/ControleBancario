@@ -12,6 +12,7 @@
 #include <windows.h>
 #include <string.h>
 #include "include/funcoes.h"
+#include "include/gotoxy.h"
 
 
 // Função para a Tela Inicial

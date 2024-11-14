@@ -4,6 +4,7 @@
 #include <windows.h>
 #include <conio.h>
 #include "include/funcoes.h"
+#include "include/gotoxy.h"
 void remove_final(TipoLista *L)
 {
     TipoApontador p;

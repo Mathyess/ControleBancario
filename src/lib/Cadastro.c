@@ -5,11 +5,13 @@
     Objetivo..: Cadastro de contas
 */
 
+// TALVEZ TENhA QUE EXCLUIR ESSE ARQUIVO, JA ESTA DIVIDIDO EM OUTROS ARQUIVOS
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
 #include <conio.h>
 #include "include/funcoes.h"
+#include "include/gotoxy.h"
 
 // Definição Estruturas de dados
 typedef struct
