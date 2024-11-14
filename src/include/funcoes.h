@@ -23,7 +23,4 @@ void gotoxy();
 void carregar();
 void Salvar();
 
-
-
-
 #endif // FUNCOES_H

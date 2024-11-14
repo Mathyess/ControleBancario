@@ -2,7 +2,6 @@
     Data......: 30/10/2024
     Equipe....: RA membro 1 168649-2024
                 RA membro 2 179381-2024
-
     Objetivo..: Cadastro de contas
 */
 
