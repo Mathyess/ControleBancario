@@ -9,7 +9,7 @@
                 "-g",
                 "${workspaceFolder}/*.c",
                 "-o",
-                "${workspaceFolder}/output/bancario"
+                "${workspaceFolder}/output/bancario.exe"
             ],
             "group": {
                 "kind": "build",
@@ -21,7 +21,7 @@
         {
             "label": "Executar Programa",
             "type": "shell",
-            "command": "${workspaceFolder}/output/bancario",
+            "command": "${workspaceFolder}/output/bancario.exe",
             "group": {
                 "kind": "test",
                 "isDefault": true

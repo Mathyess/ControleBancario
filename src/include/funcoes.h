@@ -70,5 +70,8 @@ void tela();
 void gotoxy();
 void carregar();
 void Salvar();
+void menu_contas_bancarias();
+void pesquisa();
+void conta_elementos();
 
 #endif // FUNCOES_H

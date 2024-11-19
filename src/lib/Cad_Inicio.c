@@ -3,7 +3,6 @@
 #include <windows.h>
 #include <conio.h>
 #include "include/funcoes.h"
-#include "include/gotoxy.h"
 void cad_inicio(TipoLista *L)
 {
     int resp;

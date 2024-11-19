@@ -2,7 +2,6 @@
 #include <conio.h>
 #include <stdlib.h>
 #include "include/funcoes.h"
-#include "include/gotoxy.h"
 // Tela de interacao do cliente
 void tela_clie()
 {

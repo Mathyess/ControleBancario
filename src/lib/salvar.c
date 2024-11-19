@@ -12,7 +12,6 @@
 #include <windows.h>
 #include <conio.h>
 #include "include/funcoes.h"
-#include "include/gotoxy.h"
 
 void carregar(TipoLista *L) {
     FILE *ptr = fopen("Clientes.dat", "rb");

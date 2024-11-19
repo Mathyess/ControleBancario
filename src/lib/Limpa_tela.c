@@ -4,7 +4,6 @@
 #include <windows.h>
 #include <conio.h>
 #include "include/funcoes.h"
-#include "include/gotoxy.h"
 void limpa_tela()
 {
     int lin;
