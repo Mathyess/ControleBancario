@@ -2,66 +2,62 @@
 #include <stdlib.h>
 #include <windows.h>
 #include <conio.h>
-#include "include/funcoes.h"
-void altera_cliente(TipoLista *L)
-{
+#include "../include/funcoes.h"
+
+void altera_cliente(TipoLista *L) {
     TipoApontador p;
     reg_cliente reg_clie;
-    int codigo;
-    int qtde;
-    int campo;
-    int resp;
+    int codigo, qtde, campo, resp;
+
     p = L->Primeiro;
-    if (p == NULL)
-    {
+    if (p == NULL) {
         tela();
         gotoxy(8, 23);
         printf("LISTA VAZIA...");
         getch();
+        return;
     }
-    else
-    {
-        do
-        {
-            tela();
-            tela_clie();
-            gotoxy(25, 03);
-            printf("ALTERACAO DADOS DO CLIENTE");
-            gotoxy(60, 03);
-            qtde = conta_elementos(L);
-            printf("Total Clientes.: %d", qtde);
-            gotoxy(30, 05);
-            scanf("%d", &codigo);
-            p = pesquisa(L, codigo);
-            if (p == NULL)
-            {
-                gotoxy(07, 23);
-                printf("Cliente Nao Cadastrado..");
-                getch();
-            }
-        } while (p == NULL);
 
-        // Mostra registro do Cliente
-        mostra_cliente(p->conteudo);
-        reg_clie = p->conteudo;
-        do
-        {
-            gotoxy(07, 23);
-            printf("                                               ");
-            gotoxy(07, 23);
-            printf("Digite o Campo a ser Alterado (0=Sair).: ");
-            scanf("%d", &campo);
-            getchar();
-            if (campo > 8)
-            {
-                gotoxy(07, 23);
-                printf("                                           ");
-                gotoxy(07, 23);
-                printf("Campo invalido..");
-                getch();
-            }
-            switch (campo)
-            {
+    do {
+        tela();
+        tela_clie();
+        gotoxy(25, 3);
+        printf("ALTERACAO DADOS DO CLIENTE");
+        gotoxy(60, 3);
+        qtde = conta_elementos(L);
+        printf("Total Clientes.: %d", qtde);
+        gotoxy(30, 5);
+        printf("Digite o código do cliente: ");
+        scanf("%d", &codigo);
+        getchar();
+        p = pesquisa(L, codigo);
+        if (p == NULL) {
+            gotoxy(7, 23);
+            printf("Cliente Nao Cadastrado..");
+            getch();
+        }
+    } while (p == NULL);
+
+    // Mostra registro do Cliente
+    mostra_cliente(p->conteudo);
+    reg_clie = p->conteudo;
+
+    do {
+        gotoxy(7, 23);
+        printf("                                               ");
+        gotoxy(7, 23);
+        printf("Digite o Campo a ser Alterado (0=Sair).: ");
+        scanf("%d", &campo);
+        getchar();
+
+        if (campo < 0 || campo > 8) {
+            gotoxy(7, 23);
+            printf("Campo inválido..");
+            getch();
+            continue;
+        }
+
+        switch (campo) {
             case 1:
                 strcpy(reg_clie.nm_cliente, le_nm_nome());
                 break;
@@ -88,16 +84,18 @@ void altera_cliente(TipoLista *L)
                 break;
             default:
                 break;
-            }
-        } while ((campo != 0));
-        gotoxy(07, 23);
-        printf("                                             ");
-        gotoxy(07, 23);
-        printf("Confirma a Alteracao dos Dados (1-Sim;2-Nao).: ");
-        scanf("%d", &resp);
-        if (resp == 1)
-        {
-            p->conteudo = reg_clie;
         }
+    } while (campo != 0);
+
+    gotoxy(7, 23);
+    printf("Confirma a Alteração dos Dados (1-Sim;2-Não): ");
+    scanf("%d", &resp);
+    getchar();
+
+    if (resp == 1) {
+        p->conteudo = reg_clie;
+        gotoxy(7, 23);
+        printf("Dados alterados com sucesso!");
+        getch();
     }
 }

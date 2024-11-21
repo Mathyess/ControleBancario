@@ -2,7 +2,11 @@
 #include <stdlib.h>
 #include <windows.h>
 #include <conio.h>
-#include "include/funcoes.h"
+#include "../include/funcoes.h"
+
+
+// Função para a Tela Inicial
+
 
 // Função que contém o código de Contas Bancárias (exibe apenas quando a opção 1 é escolhida)
 void menu_contas_bancarias() {

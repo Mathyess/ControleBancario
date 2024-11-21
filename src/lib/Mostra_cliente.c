@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <windows.h>
 #include <conio.h>
-#include "include/funcoes.h"
+#include "../include/funcoes.h"
 void mostra_cliente(reg_cliente reg_clie)
 {
     gotoxy(30, 05);

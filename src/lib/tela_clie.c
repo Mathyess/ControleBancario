@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <conio.h>
 #include <stdlib.h>
-#include "include/funcoes.h"
+#include "../include/funcoes.h"
 // Tela de interacao do cliente
 void tela_clie()
 {

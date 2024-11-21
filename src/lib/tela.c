@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <windows.h>
-#include "include/funcoes.h"
+#include "../include/funcoes.h"
 
 // Mostra a Tela Padrao
 void tela()

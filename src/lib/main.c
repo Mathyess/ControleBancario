@@ -11,7 +11,7 @@
 #include <conio.h>
 #include <windows.h>
 #include <string.h>
-#include "include/funcoes.h"
+#include "../include/funcoes.h"
 
 
 // Função para a Tela Inicial
@@ -44,12 +44,11 @@ void menu_inicial() {
         default:
             printf("Opcao invalida! Tente novamente.");
             getch();
-            menu_inicial();
             break;
     }
 }
 
 int main() {
-    menu_inicial(); // Inicia o programa pela tela inicial
+    menu_inicial();
     return 0;
-}
+     }
