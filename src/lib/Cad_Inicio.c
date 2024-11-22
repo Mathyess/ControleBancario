@@ -11,16 +11,16 @@ void cad_inicio(TipoLista *L)
     reg_cliente reg_clie;
     tela_clie();
     gotoxy(20, 03);
-    printf("CADASTRAR CLIENTE NO INICIO");
+    printf("CADASTRAR CONTA NO INICIO");
 
     do
     {
         gotoxy(30, 05);
         printf("           ");
         gotoxy(30, 05);
-        scanf("%d", &reg_clie.cd_cliente);
+        scanf("%d", &_conta_bancaria.codigo_conta);
         getchar();
-        aux1 = pesquisa(L, reg_clie.cd_cliente);
+        aux1 = pesquisa(L, _conta_bancaria.codigo_conta);
         if (aux1 != NULL)
         {
             gotoxy(07, 23);
@@ -32,7 +32,7 @@ void cad_inicio(TipoLista *L)
             printf("                                            ");
         }
     } while (aux1 != NULL);
-    // Le os dados do Cliente
+    // Le os dados da Conta
     leitura(&reg_clie);
 
     gotoxy(07, 23);

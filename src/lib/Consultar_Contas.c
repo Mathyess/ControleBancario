@@ -23,22 +23,22 @@ void consultar_cliente(TipoLista *L)
             tela();
             tela_clie();
             gotoxy(25, 03);
-            printf("CONSULTAR CLIENTE ESPECIFICO");
+            printf("CONSULTAR CONTA ESPECIFICA");
             gotoxy(60, 03);
             qtde = conta_elementos(L);
-            printf("Total Clientes.: %d", qtde);
+            printf("Total Contas.: %d", qtde);
             gotoxy(30, 05);
             scanf("%d", &codigo);
             p = pesquisa(L, codigo);
             if (p == NULL)
             {
                 gotoxy(07, 23);
-                printf("Cliente Nao Cadastrado..");
+                printf("Conta Nao Cadastrada..");
                 getch();
             }
         } while (p == NULL);
 
-        // Mostra registro do Cliente
+        // Mostra registro da conta
         mostra_cliente(p->conteudo);
 
         gotoxy(10, 23);

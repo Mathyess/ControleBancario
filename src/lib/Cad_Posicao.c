@@ -17,10 +17,10 @@ void cad_posicao(TipoLista *L)
     {
         tela_clie();
         gotoxy(20, 03);
-        printf("CADASTRAR CLIENTE EM UMA POSICAO");
+        printf("CADASTRAR CONTA EM UMA POSICAO");
         gotoxy(60, 03);
         qtde = conta_elementos(L);
-        printf("Total Clientes.: %d", qtde);
+        printf("Total Contas.: %d", qtde);
 
         gotoxy(8, 23);
         printf("Deseja cadastrar em qual Posicao.: ");
@@ -56,7 +56,7 @@ void cad_posicao(TipoLista *L)
                 printf("                                            ");
             }
         } while (aux1 != NULL);
-        // Le os dados do Cliente
+        // Le os dados da Conta
         leitura(&reg_clie);
 
         gotoxy(07, 23);

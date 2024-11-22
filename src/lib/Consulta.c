@@ -21,8 +21,8 @@ void consultar(TipoLista *L)
         {
             tela_clie();
             gotoxy(35, 03);
-            printf("CONSULTAR CLIENTE");
-            // Mostra registro do Cliente
+            printf("CONSULTAR CONTA");
+            // Mostra registro da Conta
             mostra_cliente(p->conteudo);
 
             gotoxy(10, 23);

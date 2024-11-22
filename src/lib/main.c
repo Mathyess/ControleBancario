@@ -36,6 +36,8 @@ void menu_inicial() {
             break;
         case 2:
             printf("Opcao Movimentacao Bancaria selecionada.");
+            getch();
+            
             break;
         case 3:
             printf("Saindo do programa...");

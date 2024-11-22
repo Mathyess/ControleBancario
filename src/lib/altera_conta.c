@@ -4,7 +4,7 @@
 #include <conio.h>
 #include "../include/funcoes.h"
 
-void altera_cliente(TipoLista *L) {
+void altera_conta(TipoLista *L) {
     TipoApontador p;
     reg_cliente reg_clie;
     int codigo, qtde, campo, resp;
@@ -22,7 +22,7 @@ void altera_cliente(TipoLista *L) {
         tela();
         tela_clie();
         gotoxy(25, 3);
-        printf("ALTERACAO DADOS DO CLIENTE");
+        printf("ALTERACAO DADOS DA CONTA");
         gotoxy(60, 3);
         qtde = conta_elementos(L);
         printf("Total Clientes.: %d", qtde);

@@ -15,3 +15,12 @@ void leitura(reg_cliente *reg_clie)
     strcpy(reg_clie->dt_cadastro, le_dt_cadastro());
     strcpy(reg_clie->nr_telefone, le_nr_telefone());
 }
+typedef struct _conta_bancaria {
+    int codigo_conta;
+    char banco[50];
+    char agencia[10];
+    char numero_conta[20];
+    char tipo_conta[20];
+    double vl_saldo;
+    double vl_limite;
+    char status[10];

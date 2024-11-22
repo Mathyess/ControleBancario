@@ -7,21 +7,19 @@ void tela_clie()
 {
     tela();
     gotoxy(07, 05);
-    printf("   Codigo do Cliente.: ");
+    printf("   Codigo da Conta.: ");
     gotoxy(07, 07);
-    printf("1- Nome do Cliente...: ");
+    printf("1- Banco...: ");
     gotoxy(07, 9);
-    printf("2- Endereco..........: ");
+    printf("2- Agencia..........: ");
     gotoxy(07, 11);
-    printf("3- Numero............: ");
+    printf("3- Numero a Conta............: ");
     gotoxy(07, 13);
-    printf("4- CPF...............: ");
+    printf("4- Tipo a Conta...............: ");
     gotoxy(07, 15);
-    printf("5- Cidade............: ");
+    printf("5- Salo............: ");
     gotoxy(07, 17);
-    printf("6- Estado............: ");
+    printf("6- Limite............: ");
     gotoxy(07, 19);
-    printf("7- Data cadastro.....: ");
-    gotoxy(07, 21);
-    printf("8- Telefone..........: ");
+    printf("7- Status Conta.....: ");
 }
