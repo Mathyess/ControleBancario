@@ -33,24 +33,43 @@ void menu_consultar(TipoLista *L)
             printf("Opcao invalida. Tente novamente: ");
             while(getchar() != '\n'); // Limpa o buffer
         }
+        getchar(); // Limpa o buffer após a leitura válida
         
         switch (opc)
         {
         case 1:
-            consultar_cliente(L);  // Alterado para a função correta
+            consultar_cliente(L);
             break;
         case 2:
-            ordena_codigo(L);
-            consulta_todos(L, "CONSULTA LISTA CLIENTES - ORDEM DE CODIGO"); // Verifique a declaração dessa função
+            if (L->Primeiro == NULL) {
+                tela();
+                gotoxy(20, 03);
+                printf("CONSULTA LISTA CLIENTES - ORDEM DE CODIGO");
+                gotoxy(07, 23);
+                printf("LISTA VAZIA..");
+                getch();
+            } else {
+                ordena_codigo(L);
+                consulta_todos(L, "CONSULTA LISTA CLIENTES - ORDEM DE CODIGO");
+            }
             break;
         case 3:
-            ordena_nome(L);
-            consulta_todos(L, "CONSULTA LISTA CLIENTES - ORDEM ALFABETICA"); // Verifique a declaração dessa função
+            if (L->Primeiro == NULL) {
+                tela();
+                gotoxy(20, 03);
+                printf("CONSULTA LISTA CLIENTES - ORDEM ALFABETICA");
+                gotoxy(07, 23);
+                printf("LISTA VAZIA..");
+                getch();
+            } else {
+                ordena_nome(L);
+                consulta_todos(L, "CONSULTA LISTA CLIENTES - ORDEM ALFABETICA");
+            }
             break;
         case 4:
-            consultar_cliente(L);  // Função para consultar um cliente específico
+            consultar_cliente(L);
             break;
-        default:
+        case 5:
             break;
         }
 

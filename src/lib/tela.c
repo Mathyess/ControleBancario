@@ -14,9 +14,10 @@ void tela()
 {
     int t;
     system("cls");
+    system("color 05"); // Define o fundo preto (0) e texto roxo (5) como padrão do sistema
     
     // Definir a cor do texto e fundo
-    SetCor(15, 0); // Texto branco, fundo preto
+    SetCor(13, 0); // Texto roxo brilhante, fundo preto
     
     gotoxy(01, 01);
     printf("+-----------------------------------------------------------------------------+");
@@ -34,6 +35,7 @@ void tela()
     printf("+-----------------------------------------------------------------------------+");
     
     // Criando bordas laterais
+    SetCor(5, 0); // Texto roxo normal para as bordas
     for (t = 5; t < 24; t++)
     {
         gotoxy(01, t);
@@ -43,6 +45,7 @@ void tela()
     }
     
     // Rodapé
+    SetCor(13, 0); // Volta para roxo brilhante para o rodapé
     gotoxy(01, 22);
     printf("+-----------------------------------------------------------------------------+");
     gotoxy(02, 23);
@@ -50,6 +53,6 @@ void tela()
     gotoxy(01, 24);
     printf("+-----------------------------------------------------------------------------+");
     
-    // Resetando para as cores padrões
-    SetCor(7, 0);  // Texto cinza, fundo preto
+    // Mantém o texto roxo normal para o conteúdo
+    SetCor(5, 0);  // Texto roxo normal, fundo preto
 }

@@ -14,77 +14,117 @@ void remove_posicao(TipoLista *L)
     int cont;
     int qtde;
 
+    // Verifica se a lista está vazia
+    if (L->Primeiro == NULL)
+    {
+        tela_conta_bancaria();
+        gotoxy(20, 03);
+        printf("REMOVER CONTA BANCARIA");
+        gotoxy(8, 23);
+        printf("Lista vazia!");
+        getch();
+        return;
+    }
+
     do
     {
-        tela_conta_bancaria();  // Alterado para tela de conta bancária
+        tela_conta_bancaria();
         gotoxy(20, 03);
-        printf("REMOVER CONTA BANCARIA EM UMA POSICAO");
+        printf("REMOVER CONTA BANCARIA");
         gotoxy(60, 03);
-        qtde = conta_elementos(L);  // Conta o número de contas bancárias
+        qtde = conta_elementos(L);
         printf("Total Contas: %d", qtde);
 
         gotoxy(8, 23);
-        printf("Deseja remover de qual Posicao?: ");
+        printf("Deseja remover de qual Posicao? (0 para cancelar): ");
         scanf("%d", &Posicao);
-        if (Posicao > qtde)
+        getchar(); // Limpa o buffer
+
+        // Opção para cancelar
+        if (Posicao == 0)
+        {
+            gotoxy(8, 23);
+            printf("Operacao cancelada.");
+            getch();
+            return;
+        }
+
+        if (Posicao > qtde || Posicao < 0)
         {
             gotoxy(07, 23);
             printf("                                                    ");
             gotoxy(8, 23);
-            printf("Posição maior que a quantidade de contas.");
+            printf("Posicao invalida. Tente novamente.");
             getch();
         }
     } while (Posicao > qtde || Posicao <= 0);
 
-    if (Posicao > 0)
+    // Encontra o Elemento a ser removido e o Elemento anterior
+    if (Posicao == 1)
     {
-        // Encontra o Elemento a ser removido e o Elemento anterior
+        r = L->Primeiro;
+        p = r;
+    }
+    else
+    {
+        r = L->Primeiro;
+        p = r->proximo;
+        cont = 1;
+        while (cont < Posicao - 1)
+        {
+            cont++;
+            p = p->proximo;
+            r = r->proximo;
+        }
+    }
+
+    // Mostra o Elemento a ser removido
+    tela_conta_bancaria();
+    gotoxy(20, 03);
+    printf("REMOVER CONTA BANCARIA");
+
+    // Exibe os dados da conta bancária
+    mostra_conta_bancaria(p->conteudo.conta_bancaria);
+
+    gotoxy(07, 23);
+    printf("Deseja Remover a Conta Bancaria (1=Sim; 2=Nao): ");
+    scanf("%d", &resp);
+    getchar(); // Limpa o buffer
+
+    if (resp == 1)
+    {
         if (Posicao == 1)
         {
-            r = L->Primeiro;
-            p = r;
+            L->Primeiro = p->proximo;
+            // Se era o único elemento
+            if (L->Primeiro == NULL)
+            {
+                L->Ultimo = NULL;
+            }
+            free(p);
         }
         else
         {
-            r = L->Primeiro;
-            p = r->proximo;
-            cont = 1;
-            while (cont < Posicao - 1)
+            r->proximo = p->proximo;
+            // Se era o último elemento
+            if (p->proximo == NULL)
             {
-                cont++;
-                p = p->proximo;
-                r = r->proximo;
+                L->Ultimo = r;
             }
+            free(p);
         }
-
-        // Mostra o Elemento a ser removido
-        tela_conta_bancaria();
-        gotoxy(20, 03);
-        printf("REMOVER CONTA BANCARIA");
-
-        // Exibe os dados da conta bancária
-        mostra_conta_bancaria(p->conteudo.conta_bancaria);  // Alterado para mostrar a conta bancária
-
         gotoxy(07, 23);
-        printf("Deseja Remover a Conta Bancaria (1=Sim; 2=Nao): ");
-        scanf("%d", &resp);
-        if (resp == 1)
-        {
-            if (Posicao == 1)
-            {
-                L->Primeiro = p->proximo;
-                free(p);
-            }
-            else
-            {
-                r->proximo = p->proximo;
-                free(p);
-            }
-            gotoxy(07, 23);
-            printf("                                                       ");
-            gotoxy(07, 23);
-            printf("Conta Bancária Removida com Sucesso.");
-            getch();
-        }
+        printf("                                                       ");
+        gotoxy(07, 23);
+        printf("Conta Bancaria Removida com Sucesso.");
+        getch();
+    }
+    else
+    {
+        gotoxy(07, 23);
+        printf("                                                       ");
+        gotoxy(07, 23);
+        printf("Operacao cancelada.");
+        getch();
     }
 }

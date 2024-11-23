@@ -11,6 +11,7 @@ void menu_inicial(TipoLista *L, TipoListaMov *M) {
 
     do {
         tela();
+        SetCor(13, 0); // Texto roxo brilhante para as opções do menu
         gotoxy(10, 10);
         printf("1. Contas Bancarias");
         gotoxy(10, 12);
@@ -18,6 +19,7 @@ void menu_inicial(TipoLista *L, TipoListaMov *M) {
         gotoxy(10, 14);
         printf("3. Sair do Programa");
 
+        SetCor(5, 0); // Texto roxo normal para a entrada
         gotoxy(10, 18);
         printf("Escolha uma opcao: ");
         if(scanf("%d", &opcao) != 1) {
@@ -41,10 +43,12 @@ void menu_inicial(TipoLista *L, TipoListaMov *M) {
                 // Salva os dados antes de sair
                 Salvar(L);
                 salvar_movimentacoes(M);
+                SetCor(13, 0); // Texto roxo brilhante para mensagem de saída
                 printf("Saindo do programa...\n");
                 exit(0);
                 break;
             default:
+                SetCor(13, 0); // Texto roxo brilhante para mensagem de erro
                 printf("Opcao invalida! Tente novamente.\n");
                 getch();
                 break;
@@ -53,6 +57,18 @@ void menu_inicial(TipoLista *L, TipoListaMov *M) {
 }
 
 int main() {
+    // Configura o console para usar cores
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
+    WORD saved_attributes;
+
+    // Salva os atributos atuais
+    GetConsoleScreenBufferInfo(hConsole, &consoleInfo);
+    saved_attributes = consoleInfo.wAttributes;
+
+    // Define a cor padrão do sistema como roxo
+    system("color 05");
+
     // Inicializa as listas
     TipoLista L;
     L.Primeiro = NULL;
@@ -68,6 +84,9 @@ int main() {
 
     // Inicia o menu passando as listas como parâmetros
     menu_inicial(&L, &M);
+
+    // Restaura os atributos originais do console antes de sair
+    SetConsoleTextAttribute(hConsole, saved_attributes);
 
     return 0;
 }

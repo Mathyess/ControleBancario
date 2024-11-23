@@ -72,7 +72,7 @@ TipoApontador verificar_codigo_conta(TipoLista *L, int codigo) {
     return NULL;
 }
 
-// Função para cadastrar conta bancária
+// Função para cadastrar conta bancária no final da lista
 void cadastrar(TipoLista *L) {
     TipoApontador p;
     TipoApontador aux1;
@@ -81,14 +81,14 @@ void cadastrar(TipoLista *L) {
     
     tela_conta_bancaria();
     gotoxy(20, 03);
-    printf("CADASTRAR CONTA BANCARIA");
+    printf("CADASTRAR CONTA BANCARIA NO FINAL");
 
     // Verifica se o código da conta já está cadastrado
     do {
         gotoxy(30, 05);
         printf("           ");
         gotoxy(07, 23);
-        printf("Digite o codigo da conta: ");
+        printf("Digite o codigo da conta bancaria: ");
         scanf("%d", &nova_conta.codigo_conta);
         getchar(); // Limpa o buffer
         
@@ -97,7 +97,7 @@ void cadastrar(TipoLista *L) {
             gotoxy(07, 23);
             printf("                                            ");
             gotoxy(07, 23);
-            printf("Codigo Ja Cadastrado..");
+            printf("Erro: O codigo %d ja esta cadastrado.", nova_conta.codigo_conta);
             getch();
             gotoxy(07, 23);
             printf("                                            ");
@@ -117,7 +117,7 @@ void cadastrar(TipoLista *L) {
         p = (TipoApontador)malloc(sizeof(TipoItem));
         if (p == NULL) {
             gotoxy(07, 23);
-            printf("Erro ao alocar memoria.");
+            printf("Erro ao alocar memoria!");
             getch();
             return;
         }
