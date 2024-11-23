@@ -1,3 +1,16 @@
+/*  
+    Alunos: Matheus Alende Pires, Pedro Henrique Pinheiro
+    Data: 28/09/2022
+    Turma: Engenharia de Software 2A
+    RA Matheus Alende Pires     168649-2024
+    RA Pedro Henrique Pinheiro  179381-2024
+    
+    Objetivo: Arquivo principal do sistema de controle bancário.
+    Este arquivo contém a função main e o menu inicial do sistema,
+    responsável por inicializar as estruturas de dados, carregar
+    os dados salvos e gerenciar o fluxo principal do programa.
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
@@ -11,7 +24,7 @@ void menu_inicial(TipoLista *L, TipoListaMov *M) {
 
     do {
         tela();
-        SetCor(13, 0); // Texto roxo brilhante para as opções do menu
+        SetCor(11, 0); // Texto azul claro para as opções do menu
         gotoxy(10, 10);
         printf("1. Contas Bancarias");
         gotoxy(10, 12);
@@ -19,10 +32,11 @@ void menu_inicial(TipoLista *L, TipoListaMov *M) {
         gotoxy(10, 14);
         printf("3. Sair do Programa");
 
-        SetCor(5, 0); // Texto roxo normal para a entrada
+        SetCor(3, 0); // Texto ciano para a entrada
         gotoxy(10, 18);
         printf("Escolha uma opcao: ");
         if(scanf("%d", &opcao) != 1) {
+            SetCor(15, 0); // Texto branco para mensagens de erro
             printf("Entrada invalida!\n");
             while(getchar() != '\n'); // Limpa o buffer
             continue;
@@ -43,12 +57,12 @@ void menu_inicial(TipoLista *L, TipoListaMov *M) {
                 // Salva os dados antes de sair
                 Salvar(L);
                 salvar_movimentacoes(M);
-                SetCor(13, 0); // Texto roxo brilhante para mensagem de saída
+                SetCor(15, 0); // Texto branco para mensagem de saída
                 printf("Saindo do programa...\n");
                 exit(0);
                 break;
             default:
-                SetCor(13, 0); // Texto roxo brilhante para mensagem de erro
+                SetCor(15, 0); // Texto branco para mensagem de erro
                 printf("Opcao invalida! Tente novamente.\n");
                 getch();
                 break;
@@ -66,8 +80,8 @@ int main() {
     GetConsoleScreenBufferInfo(hConsole, &consoleInfo);
     saved_attributes = consoleInfo.wAttributes;
 
-    // Define a cor padrão do sistema como roxo
-    system("color 05");
+    // Define a cor padrão do sistema como azul claro
+    system("color 0B");
 
     // Inicializa as listas
     TipoLista L;

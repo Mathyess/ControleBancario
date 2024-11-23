@@ -1,3 +1,21 @@
+/*  
+    Alunos: Matheus Alende Pires, Pedro Henrique Pinheiro
+    Data: 28/09/2022
+    Turma: Engenharia de Software 2A
+    RA Matheus Alende Pires     168649-2024
+    RA Pedro Henrique Pinheiro  179381-2024
+    
+    Objetivo: Implementa o submenu de consultas do sistema bancário.
+    Este módulo é responsável por gerenciar todas as operações de consulta,
+    incluindo:
+    - Consulta geral de clientes
+    - Consulta ordenada por código
+    - Consulta ordenada por nome
+    - Consulta por código específico
+    - Consulta de contas inativas
+    - Consulta de limites de crédito
+*/
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -11,8 +29,11 @@ void menu_consultar(TipoLista *L)
     do
     {
         tela();
+        SetCor(15, 0); // Texto branco para o título
         gotoxy(20, 03);
         printf("SUBMENU CONSULTA");
+        
+        SetCor(11, 0); // Texto azul claro para as opções
         gotoxy(25, 8);
         printf("1 - Consultar Fichario do Cliente Geral");
         gotoxy(25, 10);
@@ -22,13 +43,20 @@ void menu_consultar(TipoLista *L)
         gotoxy(25, 14);
         printf("4 - Consultar o Codigo Especifico");
         gotoxy(25, 16);
-        printf("5 - Retornar Menu Principal");
+        printf("5 - Consultar Contas Inativas");
+        gotoxy(25, 18);
+        printf("6 - Consultar Limites de Credito");
+        gotoxy(25, 20);
+        printf("7 - Retornar Menu Principal");
+
+        SetCor(3, 0); // Texto ciano para entrada
         gotoxy(8, 23);
         printf("Digite sua opcao.: ");
         gotoxy(28, 23);
         
         // Validação de entrada
-        while (scanf("%d", &opc) != 1 || opc < 1 || opc > 5) {
+        while (scanf("%d", &opc) != 1 || opc < 1 || opc > 7) {
+            SetCor(15, 0); // Texto branco para mensagens de erro
             gotoxy(8, 23);
             printf("Opcao invalida. Tente novamente: ");
             while(getchar() != '\n'); // Limpa o buffer
@@ -43,8 +71,10 @@ void menu_consultar(TipoLista *L)
         case 2:
             if (L->Primeiro == NULL) {
                 tela();
+                SetCor(15, 0); // Texto branco para título
                 gotoxy(20, 03);
                 printf("CONSULTA LISTA CLIENTES - ORDEM DE CODIGO");
+                SetCor(11, 0); // Texto azul claro para mensagem
                 gotoxy(07, 23);
                 printf("LISTA VAZIA..");
                 getch();
@@ -56,8 +86,10 @@ void menu_consultar(TipoLista *L)
         case 3:
             if (L->Primeiro == NULL) {
                 tela();
+                SetCor(15, 0); // Texto branco para título
                 gotoxy(20, 03);
                 printf("CONSULTA LISTA CLIENTES - ORDEM ALFABETICA");
+                SetCor(11, 0); // Texto azul claro para mensagem
                 gotoxy(07, 23);
                 printf("LISTA VAZIA..");
                 getch();
@@ -70,8 +102,36 @@ void menu_consultar(TipoLista *L)
             consultar_cliente(L);
             break;
         case 5:
+            if (L->Primeiro == NULL) {
+                tela();
+                SetCor(15, 0); // Texto branco para título
+                gotoxy(20, 03);
+                printf("CONSULTA DE CONTAS INATIVAS");
+                SetCor(11, 0); // Texto azul claro para mensagem
+                gotoxy(07, 23);
+                printf("LISTA VAZIA..");
+                getch();
+            } else {
+                consulta_todos(L, "CONSULTA DE CONTAS INATIVAS - APENAS INATIVAS");
+            }
+            break;
+        case 6:
+            if (L->Primeiro == NULL) {
+                tela();
+                SetCor(15, 0); // Texto branco para título
+                gotoxy(20, 03);
+                printf("CONSULTA DE LIMITES DE CREDITO");
+                SetCor(11, 0); // Texto azul claro para mensagem
+                gotoxy(07, 23);
+                printf("LISTA VAZIA..");
+                getch();
+            } else {
+                consulta_todos(L, "CONSULTA DE LIMITES DE CREDITO POR CONTA");
+            }
+            break;
+        case 7:
             break;
         }
 
-    } while (opc != 5);
+    } while (opc != 7);
 }

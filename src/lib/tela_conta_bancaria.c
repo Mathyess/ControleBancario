@@ -1,3 +1,30 @@
+/*  
+    Alunos: Matheus Alende Pires, Pedro Henrique Pinheiro
+    Data: 28/09/2022
+    Turma: Engenharia de Software 2A
+    RA Matheus Alende Pires     168649-2024
+    RA Pedro Henrique Pinheiro  179381-2024
+    
+    Objetivo: Implementa a interface específica para contas bancárias.
+    Este módulo fornece:
+    - Tela de cadastro e edição de contas bancárias
+    - Exibição formatada dos dados da conta
+    - Layout padronizado para entrada de dados
+    - Campos específicos para informações bancárias:
+      * Código da conta
+      * Banco
+      * Agência
+      * Número da conta
+      * Tipo de conta
+      * Saldo
+      * Limite
+      * Status da conta
+    
+    Funções:
+    - tela_conta_bancaria(): Exibe o formulário para entrada de dados
+    - mostra_conta_bancaria(): Exibe os dados de uma conta existente
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
@@ -8,7 +35,7 @@ void tela_conta_bancaria()
 {
     tela();  // Chama a função de tela base
     
-    SetCor(13, 0); // Texto roxo brilhante para os rótulos
+    SetCor(11, 0); // Texto azul claro para os rótulos
     gotoxy(07, 05);
     printf("Codigo da Conta.: ");
     
@@ -33,13 +60,13 @@ void tela_conta_bancaria()
     gotoxy(07, 19);
     printf("7- Status da Conta...: ");
     
-    SetCor(5, 0); // Volta para roxo normal para o conteúdo
+    SetCor(3, 0); // Volta para ciano para o conteúdo
 }
 
 // Função para mostrar os detalhes de uma conta bancária
 void mostra_conta_bancaria(conta_bancaria conta)
 {
-    SetCor(5, 0); // Texto roxo normal para os dados
+    SetCor(3, 0); // Texto ciano para os dados
     
     gotoxy(30, 05);
     printf("%d", conta.codigo_conta);

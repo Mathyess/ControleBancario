@@ -1,10 +1,37 @@
+/*  
+    Alunos: Matheus Alende Pires, Pedro Henrique Pinheiro
+    Data: 28/09/2022
+    Turma: Engenharia de Software 2A
+    RA Matheus Alende Pires     168649-2024
+    RA Pedro Henrique Pinheiro  179381-2024
+    
+    Objetivo: Implementa a interface visual base do sistema bancário.
+    Este módulo é responsável por:
+    - Definir o layout padrão das telas
+    - Gerenciar as cores do sistema
+    - Criar bordas e elementos visuais
+    - Manter consistência visual em toda a aplicação
+    
+    O sistema utiliza as seguintes cores:
+    - Azul claro (11): Headers e textos importantes
+    - Ciano (3): Dados e conteúdo
+    - Branco (15): Títulos principais e mensagens de destaque
+    - Preto (0): Cor de fundo
+    
+    Layout padrão:
+    - Cabeçalho com título do sistema
+    - Bordas laterais para delimitação
+    - Área de mensagens na parte inferior
+    - Área central para conteúdo específico
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
 #include <windows.h>
 #include "../include/funcoes.h"
 
-// Função para alterar as cores no console (opcional)
+// Função para alterar as cores no console
 void SetCor(int corTexto, int corFundo) {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (corFundo << 4) | corTexto);
 }
@@ -14,10 +41,10 @@ void tela()
 {
     int t;
     system("cls");
-    system("color 05"); // Define o fundo preto (0) e texto roxo (5) como padrão do sistema
+    system("color 0B"); // Define o fundo preto (0) e texto azul claro (B) como padrão do sistema
     
     // Definir a cor do texto e fundo
-    SetCor(13, 0); // Texto roxo brilhante, fundo preto
+    SetCor(11, 0); // Texto azul claro, fundo preto
     
     gotoxy(01, 01);
     printf("+-----------------------------------------------------------------------------+");
@@ -27,15 +54,19 @@ void tela()
     printf("Estrutura de Dados |");
     gotoxy(01, 03);
     printf("|");
+
+    SetCor(15, 0); // Texto branco para o título principal
     gotoxy(24, 02);
     printf("SISTEMA BANCARIO");
+    
+    SetCor(11, 0); // Volta para azul claro
     gotoxy(79, 03);
     printf("|");
     gotoxy(01, 04);
     printf("+-----------------------------------------------------------------------------+");
     
     // Criando bordas laterais
-    SetCor(5, 0); // Texto roxo normal para as bordas
+    SetCor(3, 0); // Texto ciano para as bordas
     for (t = 5; t < 24; t++)
     {
         gotoxy(01, t);
@@ -45,7 +76,7 @@ void tela()
     }
     
     // Rodapé
-    SetCor(13, 0); // Volta para roxo brilhante para o rodapé
+    SetCor(11, 0); // Volta para azul claro para o rodapé
     gotoxy(01, 22);
     printf("+-----------------------------------------------------------------------------+");
     gotoxy(02, 23);
@@ -53,6 +84,6 @@ void tela()
     gotoxy(01, 24);
     printf("+-----------------------------------------------------------------------------+");
     
-    // Mantém o texto roxo normal para o conteúdo
-    SetCor(5, 0);  // Texto roxo normal, fundo preto
+    // Mantém o texto ciano para o conteúdo
+    SetCor(3, 0);  // Texto ciano, fundo preto
 }

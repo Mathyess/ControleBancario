@@ -1,3 +1,29 @@
+/*  
+    Alunos: Matheus Alende Pires, Pedro Henrique Pinheiro
+    Data: 28/09/2022
+    Turma: Engenharia de Software 2A
+    RA Matheus Alende Pires     168649-2024
+    RA Pedro Henrique Pinheiro  179381-2024
+    
+    Objetivo: Header principal do sistema bancário.
+    Este arquivo define:
+    - Estruturas de dados principais
+    - Protótipos de todas as funções
+    - Tipos de dados personalizados
+    
+    Estruturas principais:
+    - conta_bancaria: Armazena dados da conta (código, banco, agência, etc.)
+    - reg_cliente: Armazena dados do cliente e sua conta bancária
+    - movimentacao_bancaria: Registra operações financeiras
+    
+    Tipos de Lista:
+    - Lista Simplesmente Encadeada: Para contas bancárias
+    - Lista Duplamente Encadeada: Para movimentações financeiras
+    
+    O sistema implementa operações CRUD completas para contas e
+    movimentações, além de relatórios e consultas especializadas.
+*/
+
 #ifndef FUNCOES_H
 #define FUNCOES_H
 
@@ -69,6 +95,7 @@ void tela_conta_bancaria();
 void tela_movimentacao();
 void limpa_tela();
 void gotoxy(int x, int y);
+void SetCor(int corTexto, int corFundo);
 
 // Funções de manipulação de lista
 void cadastrar(TipoLista *L);
