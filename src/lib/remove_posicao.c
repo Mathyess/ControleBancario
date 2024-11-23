@@ -4,6 +4,7 @@
 #include <windows.h>
 #include <conio.h>
 #include "../include/funcoes.h"
+
 void remove_posicao(TipoLista *L)
 {
     TipoApontador p;
@@ -12,31 +13,32 @@ void remove_posicao(TipoLista *L)
     int Posicao;
     int cont;
     int qtde;
+
     do
     {
-        tela_clie();
+        tela_conta_bancaria();  // Alterado para tela de conta bancária
         gotoxy(20, 03);
-        printf("CADASTRAR CLIENTE EM UMA POSICAO");
+        printf("REMOVER CONTA BANCARIA EM UMA POSICAO");
         gotoxy(60, 03);
-        qtde = conta_elementos(L);
-        printf("Total Clientes.: %d", qtde);
+        qtde = conta_elementos(L);  // Conta o número de contas bancárias
+        printf("Total Contas: %d", qtde);
 
         gotoxy(8, 23);
-        printf("Deseja cadastrar em qual Posicao.: ");
+        printf("Deseja remover de qual Posicao?: ");
         scanf("%d", &Posicao);
         if (Posicao > qtde)
         {
             gotoxy(07, 23);
             printf("                                                    ");
             gotoxy(8, 23);
-            printf("Posicão Maior que Qtde Elementos..");
+            printf("Posição maior que a quantidade de contas.");
             getch();
         }
-    } while (Posicao != 0 && Posicao > qtde);
+    } while (Posicao > qtde || Posicao <= 0);
 
     if (Posicao > 0)
     {
-        // Encontra o Elemento a ser removido e o Anterior a Ele
+        // Encontra o Elemento a ser removido e o Elemento anterior
         if (Posicao == 1)
         {
             r = L->Primeiro;
@@ -49,21 +51,22 @@ void remove_posicao(TipoLista *L)
             cont = 1;
             while (cont < Posicao - 1)
             {
-                cont = cont + 1;
+                cont++;
                 p = p->proximo;
                 r = r->proximo;
             }
         }
-        // mostra o Elemento a ser removido na Tela
-        tela_clie();
-        gotoxy(20, 03);
-        printf("REMOVER CLIENTE INICIO");
 
-        // Mostra registro do Cliente
-        mostra_cliente(p->conteudo);
+        // Mostra o Elemento a ser removido
+        tela_conta_bancaria();
+        gotoxy(20, 03);
+        printf("REMOVER CONTA BANCARIA");
+
+        // Exibe os dados da conta bancária
+        mostra_conta_bancaria(p->conteudo.conta_bancaria);  // Alterado para mostrar a conta bancária
 
         gotoxy(07, 23);
-        printf("Deseja Remover o Cliente no Inicio (1=Sim; 2-Nao).:");
+        printf("Deseja Remover a Conta Bancaria (1=Sim; 2=Nao): ");
         scanf("%d", &resp);
         if (resp == 1)
         {
@@ -77,6 +80,11 @@ void remove_posicao(TipoLista *L)
                 r->proximo = p->proximo;
                 free(p);
             }
+            gotoxy(07, 23);
+            printf("                                                       ");
+            gotoxy(07, 23);
+            printf("Conta Bancária Removida com Sucesso.");
+            getch();
         }
     }
 }

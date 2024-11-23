@@ -4,12 +4,14 @@
 #include <windows.h>
 #include <conio.h>
 #include "../include/funcoes.h"
+
 void remove_final(TipoLista *L)
 {
     TipoApontador p;
     TipoApontador r;
-    p = L->Ultimo;
     int resp;
+
+    p = L->Ultimo;
 
     if (p == NULL)
     {
@@ -20,15 +22,15 @@ void remove_final(TipoLista *L)
     }
     else
     {
-        tela_clie();
+        tela_conta_bancaria();  // Alterado para mostrar a tela de contas bancárias
         gotoxy(20, 03);
-        printf("REMOVER CLIENTE FINAL");
+        printf("REMOVER CONTA BANCARIA FINAL");
 
-        // Mostra registro do Cliente
-        mostra_cliente(p->conteudo);
+        // Mostra os detalhes da conta bancária
+        mostra_conta_bancaria(p->conteudo.conta_bancaria); // Alterado para mostrar os dados da conta bancária
 
-        gotoxy(07, 23);
-        printf("Deseja Remover o Cliente no Inicio (1=Sim; 2-Nao).:");
+        gotoxy(7, 23);
+        printf("Deseja Remover a Conta Bancaria no Final (1=Sim; 2=Nao): ");
         scanf("%d", &resp);
         if (resp == 1)
         {
@@ -40,7 +42,7 @@ void remove_final(TipoLista *L)
             }
             else
             {
-                // Localiza o Penultimo Elemento
+                // Localiza o penúltimo elemento
                 r = L->Primeiro;
                 p = r->proximo;
                 while (p->proximo != NULL)
@@ -52,10 +54,10 @@ void remove_final(TipoLista *L)
                 L->Ultimo = r;
                 free(p);
             }
-            gotoxy(07, 23);
+            gotoxy(7, 23);
             printf("                                                       ");
-            gotoxy(07, 23);
-            printf("Registro Removido com Sucesso.");
+            gotoxy(7, 23);
+            printf("Conta Bancária Removida com Sucesso.");
             getch();
         }
     }

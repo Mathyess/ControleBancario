@@ -1,50 +1,47 @@
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
 #include <windows.h>
 #include <conio.h>
 #include "../include/funcoes.h"
-void limpa_tela()
-{
-    int lin;
-    int col;
-    for (lin = 7; lin < 22; lin++)
-    {
-        for (col = 2; col < 79; col++)
-        {
+
+// Limpa a tela entre as linhas 7 a 22 e colunas 2 a 79
+void limpa_tela() {
+    int lin, col;
+    for (lin = 7; lin < 22; lin++) {
+        for (col = 2; col < 79; col++) {
             gotoxy(col, lin);
-            printf(" ");
+            printf(" "); // Substitui o caractere na posição com espaço
         }
     }
 }
 
-// Pesquisa se existe o Elementos na Lista
-TipoApontador pesquisa(TipoLista *L, int codigo)
-{
-    TipoApontador aux;
-    aux = L->Primeiro;
-    while (aux != NULL)
-    {
-        if (aux->conteudo.cd_cliente == codigo)
-        {
-            break;
-        }
-        aux = aux->proximo;
+// Função que pesquisa um cliente pelo código na lista
+TipoApontador pesquisa(TipoLista *L, int codigo) {
+    if (L == NULL || L->Primeiro == NULL) {
+        return NULL;  // Se a lista for NULL ou vazia, retorna NULL
     }
-    return aux;
+
+    TipoApontador p = L->Primeiro;  // Começa do início da lista
+    while (p != NULL) {  // Percorre a lista
+        if (p->conteudo.cd_cliente == codigo) {  // Se o código do cliente for igual
+            return p;  // Retorna o ponteiro para o cliente encontrado
+        }
+        p = p->proximo;  // Vai para o próximo cliente
+    }
+    return NULL;  // Se não encontrar o cliente, retorna NULL
 }
 
 // Conta quantos Elementos tem na Lista
-int conta_elementos(TipoLista *L)
-{
-    int cont;
-    TipoApontador aux;
-    aux = L->Primeiro;
-    cont = 0;
-    while (aux != NULL)
-    {
-        cont = cont + 1;
-        aux = aux->proximo;
+int conta_elementos(TipoLista *L) {
+    if (L == NULL || L->Primeiro == NULL) {
+        return 0;  // Retorna 0 se a lista for NULL ou vazia
     }
-    return cont;
+
+    int cont = 0; // Inicializa o contador
+    TipoApontador aux = L->Primeiro; // Começa do primeiro elemento da lista
+    while (aux != NULL) { // Enquanto houver elementos
+        cont++; // Incrementa o contador
+        aux = aux->proximo; // Avança para o próximo elemento
+    }
+    return cont; // Retorna o número total de elementos
 }

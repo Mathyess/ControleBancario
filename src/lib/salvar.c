@@ -1,11 +1,3 @@
-/*  Autor.....: Matheus Alende
-    Data......: 30/10/2024
-    Equipe....: RA membro 1 168649-2024
-                RA membro 2 179381-2024
-
-    Objetivo..: Salva os dados do sistema
-*/
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -13,47 +5,52 @@
 #include <conio.h>
 #include "../include/funcoes.h"
 
+// Função para carregar os dados das contas bancárias de um arquivo
 void carregar(TipoLista *L) {
-    FILE *ptr = fopen("Clientes.dat", "rb");
-    reg_cliente reg_clie;
+    FILE *ptr = fopen("Contas.dat", "rb");  // Abre o arquivo no modo binário para leitura
+    conta_bancaria reg_conta;  // Usando a estrutura correta para contas bancárias
     if (ptr == NULL) {
-        return; 
+        return;  // Se o arquivo não existe, retorna
     }
 
-    while (fread(&reg_clie, sizeof(reg_clie), 1, ptr)) { 
-        TipoApontador novo = (TipoApontador)malloc(sizeof(TipoItem));
+    // Loop para ler as contas bancárias do arquivo
+    while (fread(&reg_conta, sizeof(reg_conta), 1, ptr)) {
+        TipoApontador novo = (TipoApontador)malloc(sizeof(TipoItem));  // Aloca um novo item para a lista
         if (novo == NULL) {
             fclose(ptr);
-            return; 
+            return;  // Se não conseguir alocar memória, encerra
         }
-        novo->conteudo = reg_clie;
+
+        novo->conteudo.conta_bancaria = reg_conta;  // Copia o conteúdo da conta bancária para o novo item
         novo->proximo = NULL;
 
+        // Se a lista estiver vazia, o novo item será o primeiro e o último
         if (L->Primeiro == NULL) {
             L->Primeiro = novo;
             L->Ultimo = novo;
         } else {
-            L->Ultimo->proximo = novo;
-            L->Ultimo = novo;
+            L->Ultimo->proximo = novo;  // Conecta o novo item ao final da lista
+            L->Ultimo = novo;  // Atualiza o último item
         }
     }
 
-    fclose(ptr);
+    fclose(ptr);  // Fecha o arquivo
 }
 
-// Grava informações da lista simplesmente encadeada em um arquivo em disco
+// Função para salvar as contas bancárias em um arquivo
 void Salvar(TipoLista *L) {
-    FILE *ptr = fopen("Clientes.dat", "wb");
+    FILE *ptr = fopen("Contas.dat", "wb");  // Abre o arquivo no modo binário para escrita
 
     if (ptr == NULL) {
-        return;
+        return;  // Se o arquivo não foi aberto corretamente, retorna
     }
-    
+
     TipoApontador atual = L->Primeiro;
     while (atual != NULL) {
-        fwrite(&(atual->conteudo), sizeof(reg_cliente), 1, ptr);
-        atual = atual->proximo;
+        // Escreve os dados da conta bancária no arquivo
+        fwrite(&(atual->conteudo.conta_bancaria), sizeof(conta_bancaria), 1, ptr);
+        atual = atual->proximo;  // Vai para o próximo item na lista
     }
-    
-    fclose(ptr);
+
+    fclose(ptr);  // Fecha o arquivo
 }

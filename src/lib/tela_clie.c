@@ -2,24 +2,33 @@
 #include <conio.h>
 #include <stdlib.h>
 #include "../include/funcoes.h"
-// Tela de interacao do cliente
+
+// Tela de interação do cliente para cadastro e manipulação de contas bancárias
 void tela_clie()
 {
-    tela();
-    gotoxy(07, 05);
+    tela();  // Chama a função de tela principal (presumivelmente define a tela inicial)
+    
+    gotoxy(07, 05);  // Posiciona o cursor na linha 5, coluna 7
     printf("   Codigo da Conta.: ");
-    gotoxy(07, 07);
-    printf("1- Banco...: ");
-    gotoxy(07, 9);
-    printf("2- Agencia..........: ");
-    gotoxy(07, 11);
-    printf("3- Numero a Conta............: ");
-    gotoxy(07, 13);
-    printf("4- Tipo a Conta...............: ");
-    gotoxy(07, 15);
-    printf("5- Salo............: ");
-    gotoxy(07, 17);
-    printf("6- Limite............: ");
-    gotoxy(07, 19);
-    printf("7- Status Conta.....: ");
+    
+    gotoxy(07, 07);  // Linha 7
+    printf("1- Banco...: ");  // Exibe o campo para o código do banco
+    
+    gotoxy(07, 9);  // Linha 9
+    printf("2- Agencia..........: ");  // Exibe o campo para o código da agência
+    
+    gotoxy(07, 11);  // Linha 11
+    printf("3- Numero da Conta............: ");  // Exibe o campo para o número da conta
+    
+    gotoxy(07, 13);  // Linha 13
+    printf("4- Tipo da Conta...............: ");  // Exibe o campo para o tipo da conta (ex. Corrente, Poupança)
+    
+    gotoxy(07, 15);  // Linha 15
+    printf("5- Saldo..............: ");  // Exibe o campo para o saldo da conta
+    
+    gotoxy(07, 17);  // Linha 17
+    printf("6- Limite..............: ");  // Exibe o campo para o limite de crédito da conta (se aplicável)
+    
+    gotoxy(07, 19);  // Linha 19
+    printf("7- Status da Conta.....: ");  // Exibe o campo para o status da conta (Ativa, Inativa, Suspensa)
 }
