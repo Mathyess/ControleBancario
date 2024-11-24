@@ -14,10 +14,9 @@
 // Função para cadastrar conta bancária em uma posição específica
 void cad_posicao(TipoLista *L)
 {
-    TipoApontador p;
+TipoApontador p;
     TipoApontador r;
     TipoApontador aux1;
-    reg_cliente novo_cliente;
     conta_bancaria nova_conta;
     int resp;
     int Posicao;
@@ -76,12 +75,9 @@ void cad_posicao(TipoLista *L)
             }
         } while (aux1 != NULL);
 
-        // Leitura dos dados da conta
+// Leitura dos dados da conta
         ler_dados_conta(&nova_conta);
-
-        // Leitura dos dados do cliente
-        system("cls");
-        ler_dados_cliente(&novo_cliente);
+        obter_data_atual(nova_conta.dt_cadastro);
 
         // Confirmação para gravar os dados
         gotoxy(7, 23);
@@ -98,13 +94,16 @@ void cad_posicao(TipoLista *L)
                 return;
             }
 
-            // Atribui os dados do cliente
-            novo_cliente.cd_cliente = nova_conta.codigo_conta;
-            novo_cliente.conta_bancaria = nova_conta;
-            obter_data_atual(novo_cliente.dt_cadastro);
-
-            // Move os dados para o ponteiro r
-            r->conteudo = novo_cliente;
+// Move os dados para o ponteiro r
+            r->conteudo.conta_bancaria = nova_conta;
+            // Inicializa outros campos do reg_cliente
+            strcpy(r->conteudo.nm_cliente, "");
+            strcpy(r->conteudo.ds_endereco, "");
+            r->conteudo.nr_numero = 0;
+            strcpy(r->conteudo.nr_documento, "");
+            strcpy(r->conteudo.ds_cidade, "");
+            strcpy(r->conteudo.cd_uf, "");
+            strcpy(r->conteudo.nr_telefone, "");
 
             // Insere o registro na lista na posição desejada
             if (Posicao == 1) { // Inserir no início
@@ -129,7 +128,7 @@ void cad_posicao(TipoLista *L)
             Salvar(L);
 
             gotoxy(7, 23);
-            printf("Conta bancaria e cliente cadastrados com sucesso!");
+printf("Conta bancaria cadastrada com sucesso!");
             getch();
         } else {
             gotoxy(7, 23);

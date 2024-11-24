@@ -36,7 +36,7 @@ void ler_string(char *destino, int tamanho) {
     destino[strcspn(destino, "\n")] = 0;
 }
 
-// Função para ler os dados de uma conta bancária
+// Função para ler os dados da conta bancária
 void ler_dados_conta(conta_bancaria *conta) {
     // Lê o nome do banco
     gotoxy(30, 7);
@@ -69,8 +69,17 @@ void ler_dados_conta(conta_bancaria *conta) {
     ler_string(conta->status, sizeof(conta->status));
 }
 
-// Função para ler os dados de um cliente
-void ler_dados_cliente(reg_cliente *cliente) {
+// Função para ler todos os dados (conta e cliente)
+void ler_dados_completos(conta_bancaria *conta, reg_cliente *cliente) {
+    // Tela da conta bancária
+    tela_conta_bancaria();
+    SetCor(9, 0);
+
+    // Lê os dados da conta bancária
+    ler_dados_conta(conta);
+
+    // Lê os dados do cliente
+    system("cls");
     tela_clie();
     SetCor(9, 0);
     gotoxy(20, 3);
@@ -105,89 +114,6 @@ void ler_dados_cliente(reg_cliente *cliente) {
     gotoxy(30, 19);
     ler_string(cliente->nr_telefone, sizeof(cliente->nr_telefone));
 
-    // Obtém a data atual para o cadastro
-    obter_data_atual(cliente->dt_cadastro);
-}
-
-// Funções auxiliares de leitura
-void leitura(reg_cliente *reg_clie) {
-    strncpy(reg_clie->nm_cliente, le_nm_nome(), sizeof(reg_clie->nm_cliente) - 1);
-    reg_clie->nm_cliente[sizeof(reg_clie->nm_cliente) - 1] = '\0';
-    
-    strncpy(reg_clie->ds_endereco, le_ds_endereco(), sizeof(reg_clie->ds_endereco) - 1);
-    reg_clie->ds_endereco[sizeof(reg_clie->ds_endereco) - 1] = '\0';
-    
-    reg_clie->nr_numero = le_nr_numero();
-    
-    strncpy(reg_clie->nr_documento, le_nr_documento(), sizeof(reg_clie->nr_documento) - 1);
-    reg_clie->nr_documento[sizeof(reg_clie->nr_documento) - 1] = '\0';
-    
-    strncpy(reg_clie->ds_cidade, le_ds_cidade(), sizeof(reg_clie->ds_cidade) - 1);
-    reg_clie->ds_cidade[sizeof(reg_clie->ds_cidade) - 1] = '\0';
-    
-    strncpy(reg_clie->cd_uf, le_cd_uf(), sizeof(reg_clie->cd_uf) - 1);
-    reg_clie->cd_uf[sizeof(reg_clie->cd_uf) - 1] = '\0';
-    
-    strncpy(reg_clie->dt_cadastro, le_dt_cadastro(), sizeof(reg_clie->dt_cadastro) - 1);
-    reg_clie->dt_cadastro[sizeof(reg_clie->dt_cadastro) - 1] = '\0';
-    
-    strncpy(reg_clie->nr_telefone, le_nr_telefone(), sizeof(reg_clie->nr_telefone) - 1);
-    reg_clie->nr_telefone[sizeof(reg_clie->nr_telefone) - 1] = '\0';
-}
-
-char *le_nm_nome() {
-    static char nome[100];
-    printf("Digite o nome do cliente: ");
-    ler_string(nome, sizeof(nome));
-    return nome;
-}
-
-char *le_ds_endereco() {
-    static char endereco[200];
-    printf("Digite o endereço do cliente: ");
-    ler_string(endereco, sizeof(endereco));
-    return endereco;
-}
-
-int le_nr_numero() {
-    int numero;
-    printf("Digite o número da casa: ");
-    scanf("%d", &numero);
-    limpar_buffer();
-    return numero;
-}
-
-char *le_nr_documento() {
-    static char documento[20];
-    printf("Digite o número do documento (CPF ou CNPJ): ");
-    ler_string(documento, sizeof(documento));
-    return documento;
-}
-
-char *le_ds_cidade() {
-    static char cidade[100];
-    printf("Digite a cidade do cliente: ");
-    ler_string(cidade, sizeof(cidade));
-    return cidade;
-}
-
-char *le_cd_uf() {
-    static char uf[3];
-    printf("Digite o código da UF (ex: SP): ");
-    ler_string(uf, sizeof(uf));
-    return uf;
-}
-
-char *le_dt_cadastro() {
-    static char data[11];
-    printf("Digite a data de cadastro (DD/MM/AAAA): ");
-    ler_string(data, sizeof(data));
-    return data;
-}
-
-char *le_nr_telefone() {
-    static char telefone[20];
-    printf("Digite o número de telefone do cliente: ");
-    ler_string(telefone, sizeof(telefone));
-    return telefone;
+// Obtém a data atual para o cadastro da conta
+    obter_data_atual(conta->dt_cadastro);
 }

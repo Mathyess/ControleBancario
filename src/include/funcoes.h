@@ -8,7 +8,7 @@
 #include <windows.h>
 #include <time.h>
 
-// Estruturas para Conta Bancária e Cliente
+// Estrutura para Conta Bancária
 typedef struct {
     int codigo_conta;
     char banco[50];
@@ -18,20 +18,8 @@ typedef struct {
     double vl_saldo;
     double vl_limite;
     char status[10];
-} conta_bancaria;
-
-typedef struct {
-    int cd_cliente;
-    char nm_cliente[100];
-    char ds_endereco[200];
-    int nr_numero;
-    char nr_documento[20];
-    char ds_cidade[100];
-    char cd_uf[3];
     char dt_cadastro[11];
-    char nr_telefone[20];
-    conta_bancaria conta_bancaria;
-} reg_cliente;
+} conta_bancaria;
 
 // Estrutura para Movimentações Bancárias
 typedef struct {
@@ -58,6 +46,18 @@ typedef struct {
 } TipoListaMov;
 
 typedef struct TipoItem *TipoApontador;
+
+// Estrutura para Cliente
+typedef struct {
+    char nm_cliente[100];
+    char ds_endereco[100];
+    int nr_numero;
+    char nr_documento[20];
+    char ds_cidade[50];
+    char cd_uf[3];
+    char nr_telefone[20];
+    conta_bancaria conta_bancaria;
+} reg_cliente;
 
 typedef struct TipoItem {
     reg_cliente conteudo;
@@ -94,14 +94,14 @@ void ordena_codigo(TipoLista *L);
 void ordena_nome(TipoLista *L);
 
 // Funções de consulta
-void consultar_cliente(TipoLista *L);
 void consulta_todos(TipoLista *L, char msg[40]);
-void mostra_cliente(reg_cliente cliente);
 void mostra_conta_bancaria(conta_bancaria conta);
+void mostra_cliente(reg_cliente cliente);
+void consultar_cliente(TipoLista *L);
 
 // Funções de alteração
-void altera_cliente(TipoLista *L);
 void altera_conta(TipoLista *L);
+void altera_cliente(TipoLista *L);
 
 // Funções de menu
 void menu_inicial(void);
@@ -119,17 +119,10 @@ void salvar_movimentacoes(TipoListaMov *M);
 void carregar_movimentacoes(TipoListaMov *M);
 
 // Funções de entrada de dados
-void leitura(reg_cliente *reg_clie);
 void ler_dados_conta(conta_bancaria *conta);
-void ler_dados_cliente(reg_cliente *cliente);
-char *le_nm_nome();
-char *le_ds_endereco();
-int le_nr_numero();
-char *le_nr_documento();
-char *le_ds_cidade();
-char *le_cd_uf();
-char *le_dt_cadastro();
-char *le_nr_telefone();
+void ler_dados_completos(conta_bancaria *conta, reg_cliente *cliente);
+void limpar_buffer();
+void ler_string(char *destino, int tamanho);
 
 // Funções auxiliares
 int ler_inteiro();

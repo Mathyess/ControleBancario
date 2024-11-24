@@ -15,8 +15,8 @@
 void mostra_cliente(reg_cliente cliente)
 {
     // Exibe os dados do cliente nas posições corretas da tela
-    gotoxy(30, 05);
-    printf("Codigo: %d", cliente.cd_cliente);
+gotoxy(30, 05);
+    printf("Codigo: %d", cliente.conta_bancaria.codigo_conta);
 
     gotoxy(30, 07);
     printf("Nome: %s", cliente.nm_cliente);

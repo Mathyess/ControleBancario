@@ -19,7 +19,6 @@ void cadastrar(TipoLista *L) {
     TipoApontador aux1;
     int resp;
     conta_bancaria nova_conta;
-    reg_cliente novo_cliente;
     
     tela_conta_bancaria();
     gotoxy(20, 3);
@@ -48,18 +47,7 @@ void cadastrar(TipoLista *L) {
 
     // Leitura dos dados da conta
     ler_dados_conta(&nova_conta);
-
-    // Inicializa os dados do cliente
-    novo_cliente.cd_cliente = nova_conta.codigo_conta;
-    strcpy(novo_cliente.nm_cliente, "Cliente");
-    strcpy(novo_cliente.ds_endereco, "Endereco Padrao");
-    novo_cliente.nr_numero = 0;
-    strcpy(novo_cliente.nr_documento, "Documento");
-    strcpy(novo_cliente.ds_cidade, "Cidade");
-    strcpy(novo_cliente.cd_uf, "UF");
-    obter_data_atual(novo_cliente.dt_cadastro);
-    strcpy(novo_cliente.nr_telefone, "Telefone");
-    novo_cliente.conta_bancaria = nova_conta;
+    obter_data_atual(nova_conta.dt_cadastro);
 
     // Confirmação de gravação dos dados
     gotoxy(7, 23);
@@ -76,8 +64,16 @@ void cadastrar(TipoLista *L) {
             return;
         }
 
-        // Atribui os dados do cliente e conta
-        p->conteudo = novo_cliente;
+// Atribui os dados da conta
+        p->conteudo.conta_bancaria = nova_conta;
+        // Inicializa outros campos do reg_cliente
+        strcpy(p->conteudo.nm_cliente, "");
+        strcpy(p->conteudo.ds_endereco, "");
+        p->conteudo.nr_numero = 0;
+        strcpy(p->conteudo.nr_documento, "");
+        strcpy(p->conteudo.ds_cidade, "");
+        strcpy(p->conteudo.cd_uf, "");
+        strcpy(p->conteudo.nr_telefone, "");
         p->proximo = NULL;
 
         // Se a lista estiver vazia
