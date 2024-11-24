@@ -8,92 +8,91 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <windows.h>
+#include <conio.h>
 #include "../include/funcoes.h"
 
 void salvar_movimentacoes(TipoListaMov *M) {
+    FILE *arquivo;
+    TipoApontadorMov p;
+    long registros_salvos = 0;
+    size_t tamanho;
+    
     if (M == NULL) {
-        return;
-    }
-
-    FILE *arquivo = fopen("Movimentacoes.dat", "wb");
-    if (arquivo == NULL) {
-        gotoxy(8, 23);
-        printf("Erro ao abrir arquivo para salvar movimentacoes!");
+        printf("Erro: Lista invalida!\n");
         getch();
         return;
     }
 
-    TipoApontadorMov atual = M->Primeiro;
-    int registros_salvos = 0;
+    arquivo = fopen("Movimentacoes.dat", "wb");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir arquivo para gravacao!\n");
+        getch();
+        return;
+    }
 
-    while (atual != NULL) {
-        // Escreve a movimentação no arquivo
-        if (fwrite(&(atual->conteudo), sizeof(movimentacao_bancaria), 1, arquivo) != 1) {
-            gotoxy(8, 23);
-            printf("Erro ao salvar movimentacao!");
+    // Grava cada movimentação no arquivo
+    p = M->Primeiro;
+    while (p != NULL) {
+        if (fwrite(&p->conteudo, sizeof(movimentacao_bancaria), 1, arquivo) != 1) {
+            printf("Erro ao gravar movimentacao!\n");
             getch();
             fclose(arquivo);
             return;
         }
         registros_salvos++;
-        atual = atual->proximo;
+        p = p->proximo;
     }
 
-    fclose(arquivo);
-
-    // Verifica se o arquivo foi criado corretamente
-    arquivo = fopen("Movimentacoes.dat", "rb");
-    if (arquivo != NULL) {
-        fseek(arquivo, 0, SEEK_END);
-        long tamanho = ftell(arquivo);
+    // Verifica se o arquivo foi gravado corretamente
+    tamanho = ftell(arquivo);
+    if ((size_t)tamanho != (size_t)(registros_salvos * sizeof(movimentacao_bancaria))) {
+        printf("Erro: Arquivo gravado com tamanho incorreto!\n");
+        getch();
         fclose(arquivo);
-        
-        if (tamanho != (registros_salvos * sizeof(movimentacao_bancaria))) {
-            gotoxy(8, 23);
-            printf("Erro: Tamanho do arquivo inconsistente!");
-            getch();
-        }
-    }
-}
-
-void carregar_movimentacoes(TipoListaMov *M) {
-    if (M == NULL) {
         return;
     }
 
-    // Limpa a lista atual
-    while (M->Primeiro != NULL) {
-        TipoApontadorMov temp = M->Primeiro;
-        M->Primeiro = M->Primeiro->proximo;
-        free(temp);
-    }
-    M->Primeiro = NULL;
-    M->Ultimo = NULL;
+    fclose(arquivo);
+}
 
-    FILE *arquivo = fopen("Movimentacoes.dat", "rb");
-    if (arquivo == NULL) {
-        return; // Arquivo não existe ainda, lista permanece vazia
-    }
-
+void carregar_movimentacoes(TipoListaMov *M) {
+    FILE *arquivo;
     movimentacao_bancaria mov;
-    int registros_lidos = 0;
+    TipoApontadorMov novo;
+    long registros_lidos = 0;
+    size_t tamanho;
+    
+    if (M == NULL) {
+        printf("Erro: Lista invalida!\n");
+        getch();
+        return;
+    }
+
+    arquivo = fopen("Movimentacoes.dat", "rb");
+    if (arquivo == NULL) {
+        // Arquivo não existe ainda, não é um erro
+        return;
+    }
+
+    // Obtém o tamanho do arquivo
+    fseek(arquivo, 0, SEEK_END);
+    tamanho = ftell(arquivo);
+    fseek(arquivo, 0, SEEK_SET);
 
     // Lê cada movimentação do arquivo
     while (fread(&mov, sizeof(movimentacao_bancaria), 1, arquivo) == 1) {
-        TipoApontadorMov novo = (TipoApontadorMov)malloc(sizeof(TipoItemMov));
+        novo = (TipoApontadorMov)malloc(sizeof(TipoItemMov));
         if (novo == NULL) {
-            gotoxy(8, 23);
-            printf("Erro de alocacao de memoria!");
+            printf("Erro ao alocar memoria!\n");
             getch();
             fclose(arquivo);
             return;
         }
 
-        // Copia os dados lidos para o novo nó
         novo->conteudo = mov;
         novo->proximo = NULL;
 
-        // Insere o novo nó na lista
         if (M->Primeiro == NULL) {
             M->Primeiro = novo;
             M->Ultimo = novo;
@@ -101,22 +100,17 @@ void carregar_movimentacoes(TipoListaMov *M) {
             M->Ultimo->proximo = novo;
             M->Ultimo = novo;
         }
+
         registros_lidos++;
     }
 
-    fclose(arquivo);
-
-    // Verifica se todos os registros foram lidos corretamente
-    FILE *verificacao = fopen("Movimentacoes.dat", "rb");
-    if (verificacao != NULL) {
-        fseek(verificacao, 0, SEEK_END);
-        long tamanho = ftell(verificacao);
-        fclose(verificacao);
-        
-        if (tamanho != (registros_lidos * sizeof(movimentacao_bancaria))) {
-            gotoxy(8, 23);
-            printf("Aviso: Possivel erro na leitura dos dados!");
-            getch();
-        }
+    // Verifica se o arquivo foi lido corretamente
+    if ((size_t)tamanho != (size_t)(registros_lidos * sizeof(movimentacao_bancaria))) {
+        printf("Erro: Arquivo lido com tamanho incorreto!\n");
+        getch();
+        fclose(arquivo);
+        return;
     }
+
+    fclose(arquivo);
 }

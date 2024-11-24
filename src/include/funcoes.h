@@ -1,31 +1,12 @@
-/*  
-    Alunos: Matheus Alende Pires, Pedro Henrique Pinheiro
-    Data: 28/09/2022
-    Turma: Engenharia de Software 2A
-    RA Matheus Alende Pires     168649-2024
-    RA Pedro Henrique Pinheiro  179381-2024
-    
-    Objetivo: Header principal do sistema bancário.
-    Este arquivo define:
-    - Estruturas de dados principais
-    - Protótipos de todas as funções
-    - Tipos de dados personalizados
-    
-    Estruturas principais:
-    - conta_bancaria: Armazena dados da conta (código, banco, agência, etc.)
-    - reg_cliente: Armazena dados do cliente e sua conta bancária
-    - movimentacao_bancaria: Registra operações financeiras
-    
-    Tipos de Lista:
-    - Lista Simplesmente Encadeada: Para contas bancárias
-    - Lista Duplamente Encadeada: Para movimentações financeiras
-    
-    O sistema implementa operações CRUD completas para contas e
-    movimentações, além de relatórios e consultas especializadas.
-*/
-
 #ifndef FUNCOES_H
 #define FUNCOES_H
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <conio.h>
+#include <windows.h>
+#include <time.h>
 
 // Estruturas para Conta Bancária e Cliente
 typedef struct {
@@ -56,8 +37,8 @@ typedef struct {
 typedef struct {
     int codigo_movimentacao;
     int codigo_conta_origem;
-    int codigo_conta_destino;  // Para transferências
-    char tipo_movimentacao[20];  // "DEBITO", "CREDITO", "TRANSFERENCIA"
+    int codigo_conta_destino;
+    char tipo_movimentacao[20];
     double valor;
     char data[11];
     char hora[9];
@@ -123,8 +104,8 @@ void altera_cliente(TipoLista *L);
 void altera_conta(TipoLista *L);
 
 // Funções de menu
-void menu_inicial();
-void menu_contas_bancarias();
+void menu_inicial(void);
+void menu_contas_bancarias(TipoLista *L);
 void menu_movimentacoes(TipoLista *L, TipoListaMov *M);
 void menu_consultar(TipoLista *L);
 
@@ -139,6 +120,8 @@ void carregar_movimentacoes(TipoListaMov *M);
 
 // Funções de entrada de dados
 void leitura(reg_cliente *reg_clie);
+void ler_dados_conta(conta_bancaria *conta);
+void ler_dados_cliente(reg_cliente *cliente);
 char *le_nm_nome();
 char *le_ds_endereco();
 int le_nr_numero();
@@ -152,6 +135,7 @@ char *le_nr_telefone();
 int ler_inteiro();
 void pausa();
 void obter_data_hora(char *data, char *hora);
+void obter_data_atual(char *data);
 
 // Funções de persistência
 void carregar(TipoLista *L);

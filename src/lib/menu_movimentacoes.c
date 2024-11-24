@@ -14,9 +14,31 @@
 void menu_movimentacoes(TipoLista *L, TipoListaMov *M) {
     int opc;
     
+    // Verifica se as listas são válidas
+    if (L == NULL) {
+        printf("Erro: Lista de contas invalida!\n");
+        getch();
+        return;
+    }
+
+    // Inicializa a lista de movimentações se necessário
+    if (M == NULL) {
+        M = (TipoListaMov*)malloc(sizeof(TipoListaMov));
+        if (M == NULL) {
+            printf("Erro: Falha ao alocar memoria!\n");
+            getch();
+            return;
+        }
+        M->Primeiro = NULL;
+        M->Ultimo = NULL;
+        carregar_movimentacoes(M);
+    }
+    
     do {
         tela();
-        gotoxy(20, 03);
+        SetCor(9, 0); // Define azul claro para toda a interface
+        
+        gotoxy(20, 3);
         printf("MENU DE MOVIMENTACOES BANCARIAS");
         
         // Opções do menu
@@ -33,8 +55,14 @@ void menu_movimentacoes(TipoLista *L, TipoListaMov *M) {
         
         gotoxy(8, 23);
         printf("Digite sua opcao.: ");
-        scanf("%d", &opc);
-        getchar(); // Limpa o buffer
+        
+        // Validação da entrada
+        while (scanf("%d", &opc) != 1 || opc < 1 || opc > 5) {
+            gotoxy(8, 23);
+            printf("Opcao invalida! Digite novamente: ");
+            while(getchar() != '\n'); // Limpa o buffer
+        }
+        getchar(); // Limpa o buffer após leitura válida
         
         switch(opc) {
             case 1:
@@ -62,6 +90,9 @@ void menu_movimentacoes(TipoLista *L, TipoListaMov *M) {
                 // Salva antes de retornar ao menu principal
                 salvar_movimentacoes(M);
                 Salvar(L);
+                gotoxy(8, 23);
+                printf("Retornando ao menu principal...");
+                getch();
                 break;
             default:
                 gotoxy(8, 23);

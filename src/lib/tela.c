@@ -12,11 +12,8 @@
     - Criar bordas e elementos visuais
     - Manter consistência visual em toda a aplicação
     
-    O sistema utiliza as seguintes cores:
-    - Azul claro (11): Headers e textos importantes
-    - Ciano (3): Dados e conteúdo
-    - Branco (15): Títulos principais e mensagens de destaque
-    - Preto (0): Cor de fundo
+    O sistema utiliza uma única cor:
+    - Azul claro (9): Todos os elementos da interface
     
     Layout padrão:
     - Cabeçalho com título do sistema
@@ -41,10 +38,10 @@ void tela()
 {
     int t;
     system("cls");
-    system("color 0B"); // Define o fundo preto (0) e texto azul claro (B) como padrão do sistema
+    system("color 09"); // Define o fundo preto (0) e texto azul claro (9) como padrão do sistema
     
     // Definir a cor do texto e fundo
-    SetCor(11, 0); // Texto azul claro, fundo preto
+    SetCor(9, 0); // Texto azul claro, fundo preto
     
     gotoxy(01, 01);
     printf("+-----------------------------------------------------------------------------+");
@@ -55,18 +52,16 @@ void tela()
     gotoxy(01, 03);
     printf("|");
 
-    SetCor(15, 0); // Texto branco para o título principal
+    // Título principal também em azul claro
     gotoxy(24, 02);
     printf("SISTEMA BANCARIO");
     
-    SetCor(11, 0); // Volta para azul claro
     gotoxy(79, 03);
     printf("|");
     gotoxy(01, 04);
     printf("+-----------------------------------------------------------------------------+");
     
     // Criando bordas laterais
-    SetCor(3, 0); // Texto ciano para as bordas
     for (t = 5; t < 24; t++)
     {
         gotoxy(01, t);
@@ -76,14 +71,10 @@ void tela()
     }
     
     // Rodapé
-    SetCor(11, 0); // Volta para azul claro para o rodapé
     gotoxy(01, 22);
     printf("+-----------------------------------------------------------------------------+");
     gotoxy(02, 23);
     printf("MSG.:");
     gotoxy(01, 24);
     printf("+-----------------------------------------------------------------------------+");
-    
-    // Mantém o texto ciano para o conteúdo
-    SetCor(3, 0);  // Texto ciano, fundo preto
 }

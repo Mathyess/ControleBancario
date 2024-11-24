@@ -20,15 +20,21 @@ void realizar_transferencia(TipoLista *L, TipoListaMov *M) {
     char data[11], hora[9];
     TipoApontador conta_origem, conta_destino;
     
+    if (L == NULL || M == NULL) {
+        printf("Erro: Lista invalida!\n");
+        getch();
+        return;
+    }
+
     tela();
-    gotoxy(20, 03);
+    SetCor(9, 0); // Define azul claro para toda a interface
+    gotoxy(20, 3);
     printf("REALIZAR TRANSFERENCIA");
     
     // Solicita e valida a conta de origem
     gotoxy(8, 8);
     printf("Digite o codigo da conta de origem: ");
-    scanf("%d", &codigo_origem);
-    getchar(); // Limpa o buffer
+    codigo_origem = ler_inteiro();
     
     conta_origem = pesquisa(L, codigo_origem);
     if (conta_origem == NULL) {
@@ -38,16 +44,17 @@ void realizar_transferencia(TipoLista *L, TipoListaMov *M) {
         return;
     }
     
-    // Mostra os dados da conta de origem
+    // Mostra os dados do cliente e conta de origem
     gotoxy(8, 10);
-    printf("Conta de Origem:");
+    printf("Cliente Origem: %s", conta_origem->conteudo.nm_cliente);
+    gotoxy(8, 11);
+    printf("Documento: %s", conta_origem->conteudo.nr_documento);
     mostra_conta_bancaria(conta_origem->conteudo.conta_bancaria);
     
     // Solicita e valida a conta de destino
     gotoxy(8, 12);
     printf("Digite o codigo da conta de destino: ");
-    scanf("%d", &codigo_destino);
-    getchar(); // Limpa o buffer
+    codigo_destino = ler_inteiro();
     
     if (codigo_destino == codigo_origem) {
         gotoxy(8, 23);
@@ -64,9 +71,11 @@ void realizar_transferencia(TipoLista *L, TipoListaMov *M) {
         return;
     }
     
-    // Mostra os dados da conta de destino
+    // Mostra os dados do cliente e conta de destino
     gotoxy(50, 10);
-    printf("Conta de Destino:");
+    printf("Cliente Destino: %s", conta_destino->conteudo.nm_cliente);
+    gotoxy(50, 11);
+    printf("Documento: %s", conta_destino->conteudo.nr_documento);
     gotoxy(50, 12);
     printf("Banco: %s", conta_destino->conteudo.conta_bancaria.banco);
     gotoxy(50, 13);
@@ -79,6 +88,13 @@ void realizar_transferencia(TipoLista *L, TipoListaMov *M) {
     printf("Digite o valor da transferencia: R$ ");
     scanf("%lf", &valor);
     getchar(); // Limpa o buffer
+    
+    if (valor <= 0) {
+        gotoxy(8, 23);
+        printf("Valor invalido!");
+        getch();
+        return;
+    }
     
     // Verifica se há saldo suficiente (considerando o limite)
     double saldo_disponivel = conta_origem->conteudo.conta_bancaria.vl_saldo + conta_origem->conteudo.conta_bancaria.vl_limite;
@@ -131,6 +147,10 @@ void realizar_transferencia(TipoLista *L, TipoListaMov *M) {
     conta_origem->conteudo.conta_bancaria.vl_saldo -= valor;
     conta_destino->conteudo.conta_bancaria.vl_saldo += valor;
     
+    // Salva as alterações imediatamente
+    Salvar(L);
+    salvar_movimentacoes(M);
+
     gotoxy(8, 23);
     printf("Transferencia realizada com sucesso!");
     getch();

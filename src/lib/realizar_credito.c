@@ -20,15 +20,21 @@ void realizar_credito(TipoLista *L, TipoListaMov *M) {
     char data[11], hora[9];
     TipoApontador conta;
     
+    if (L == NULL || M == NULL) {
+        printf("Erro: Lista invalida!\n");
+        getch();
+        return;
+    }
+
     tela();
-    gotoxy(20, 03);
+    SetCor(9, 0); // Define azul claro para toda a interface
+    gotoxy(20, 3);
     printf("REALIZAR CREDITO");
     
     // Solicita e valida o código da conta
     gotoxy(8, 8);
     printf("Digite o codigo da conta: ");
-    scanf("%d", &codigo_conta);
-    getchar(); // Limpa o buffer
+    codigo_conta = ler_inteiro();
     
     conta = pesquisa(L, codigo_conta);
     if (conta == NULL) {
@@ -37,6 +43,12 @@ void realizar_credito(TipoLista *L, TipoListaMov *M) {
         getch();
         return;
     }
+    
+    // Mostra os dados do cliente e da conta
+    gotoxy(8, 10);
+    printf("Cliente: %s", conta->conteudo.nm_cliente);
+    gotoxy(8, 11);
+    printf("Documento: %s", conta->conteudo.nr_documento);
     
     // Mostra os dados da conta
     mostra_conta_bancaria(conta->conteudo.conta_bancaria);
@@ -95,6 +107,10 @@ void realizar_credito(TipoLista *L, TipoListaMov *M) {
     // Atualiza o saldo da conta
     conta->conteudo.conta_bancaria.vl_saldo += valor;
     
+    // Salva as alterações imediatamente
+    Salvar(L);
+    salvar_movimentacoes(M);
+
     gotoxy(8, 23);
     printf("Credito realizado com sucesso!");
     getch();

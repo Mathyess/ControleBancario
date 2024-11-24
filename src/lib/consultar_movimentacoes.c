@@ -16,7 +16,14 @@ void consultar_movimentacoes(TipoListaMov *M) {
     TipoApontadorMov p;
     int lin;
     
+    if (M == NULL) {
+        printf("Erro: Lista invalida!\n");
+        getch();
+        return;
+    }
+
     tela();
+    SetCor(9, 0); // Define azul claro para toda a interface
     gotoxy(20, 3);
     printf("CONSULTA DE MOVIMENTACOES BANCARIAS");
     
@@ -36,6 +43,10 @@ void consultar_movimentacoes(TipoListaMov *M) {
         getch();
         return;
     }
+    
+    double total_creditos = 0;
+    double total_debitos = 0;
+    int total_movimentacoes = 0;
     
     while (p != NULL) {
         gotoxy(2, lin);
@@ -71,16 +82,33 @@ void consultar_movimentacoes(TipoListaMov *M) {
         desc_truncada[19] = '\0';
         printf("%-19s", desc_truncada);
         
+        // Atualiza totais
+        if (strcmp(p->conteudo.tipo_movimentacao, "CREDITO") == 0) {
+            total_creditos += p->conteudo.valor;
+        } else if (strcmp(p->conteudo.tipo_movimentacao, "DEBITO") == 0) {
+            total_debitos += p->conteudo.valor;
+        }
+        total_movimentacoes++;
+        
         lin++;
         
         // Se atingir o limite da tela, pausa e continua em uma nova página
-        if (lin > 21) {
+        if (lin > 19) {
+            gotoxy(8, 21);
+            printf("Total de movimentacoes: %d", total_movimentacoes);
+            gotoxy(8, 22);
+            printf("Total de creditos: R$ %.2f", total_creditos);
             gotoxy(8, 23);
+            printf("Total de debitos: R$ %.2f", total_debitos);
+            gotoxy(8, 24);
             printf("Pressione qualquer tecla para continuar...");
             getch();
             
             // Limpa a tela e reimprime o cabeçalho
             limpa_tela();
+            SetCor(9, 0); // Mantém a cor azul claro
+            gotoxy(20, 3);
+            printf("CONSULTA DE MOVIMENTACOES BANCARIAS");
             gotoxy(2, 5);
             printf("Cod    Data      Hora     Tipo           Origem  Destino    Valor R$  Descricao");
             gotoxy(2, 6);
@@ -91,7 +119,17 @@ void consultar_movimentacoes(TipoListaMov *M) {
         p = p->proximo;
     }
     
-    gotoxy(8, 23);
+    // Exibe totais na última página
+    if (lin <= 19) {
+        gotoxy(8, 21);
+        printf("Total de movimentacoes: %d", total_movimentacoes);
+        gotoxy(8, 22);
+        printf("Total de creditos: R$ %.2f", total_creditos);
+        gotoxy(8, 23);
+        printf("Total de debitos: R$ %.2f", total_debitos);
+    }
+    
+    gotoxy(8, 24);
     printf("Pressione qualquer tecla para voltar ao menu...");
     getch();
 }

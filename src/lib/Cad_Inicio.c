@@ -12,25 +12,30 @@
 #include "../include/funcoes.h"
 
 // Função para cadastrar conta bancária no início da lista
-void cad_inicio(TipoLista *L)
-{
+void cad_inicio(TipoLista *L) {
     int resp;
     TipoApontador p;
     TipoApontador aux1;
-    reg_cliente reg_clie;
+    reg_cliente novo_cliente;
     conta_bancaria nova_conta;
+
+    if (L == NULL) {
+        printf("Erro: Lista invalida!\n");
+        getch();
+        return;
+    }
 
     // Exibe a tela de conta bancária
     tela_conta_bancaria();
-    gotoxy(20, 03);
-    printf("CADASTRAR CONTA BANCARIA");
+    SetCor(9, 0); // Define azul claro para toda a interface
+    gotoxy(20, 3);
+    printf("CADASTRAR CONTA BANCARIA NO INICIO");
 
     // Laço para verificar se o código da conta já foi cadastrado
-    do
-    {
-        gotoxy(30, 05);
+    do {
+        gotoxy(30, 5);
         printf("           "); // Limpa o campo de entrada
-        gotoxy(07, 23);
+        gotoxy(7, 23);
         printf("Digite o codigo da conta: ");
         scanf("%d", &nova_conta.codigo_conta);
         getchar(); // Limpa o buffer
@@ -38,12 +43,12 @@ void cad_inicio(TipoLista *L)
         // Pesquisa a conta na lista
         aux1 = verificar_codigo_conta(L, nova_conta.codigo_conta);
         if (aux1 != NULL) {
-            gotoxy(07, 23);
+            gotoxy(7, 23);
             printf("                                            ");
-            gotoxy(07, 23);
+            gotoxy(7, 23);
             printf("Erro: O codigo %d ja esta cadastrado.", nova_conta.codigo_conta);
             getch();
-            gotoxy(07, 23);
+            gotoxy(7, 23);
             printf("                                            ");
         }
     } while (aux1 != NULL);
@@ -51,54 +56,49 @@ void cad_inicio(TipoLista *L)
     // Leitura dos dados da conta
     ler_dados_conta(&nova_conta);
 
+    // Leitura dos dados do cliente
+    system("cls");
+    ler_dados_cliente(&novo_cliente);
+
     // Confirmação para gravar os dados
-    gotoxy(07, 23);
+    gotoxy(7, 23);
     printf("Deseja gravar os dados (1-Sim; 2-Nao).: ");
     scanf("%d", &resp);
     getchar(); // Limpa o buffer
 
-    if (resp == 1)
-    {
+    if (resp == 1) {
         // Criação de um novo nó e inserção no início da lista
         p = (TipoApontador)malloc(sizeof(TipoItem));
-        if (p == NULL)
-        {
-            gotoxy(07, 23);
+        if (p == NULL) {
+            gotoxy(7, 23);
             printf("Erro ao alocar memoria!");
             getch();
             return;
         }
         
-        // Inicializa os dados do cliente com valores vazios
-        reg_clie.cd_cliente = nova_conta.codigo_conta;
-        strcpy(reg_clie.nm_cliente, "");
-        strcpy(reg_clie.ds_endereco, "");
-        reg_clie.nr_numero = 0;
-        strcpy(reg_clie.nr_documento, "");
-        strcpy(reg_clie.ds_cidade, "");
-        strcpy(reg_clie.cd_uf, "");
-        strcpy(reg_clie.dt_cadastro, "");
-        strcpy(reg_clie.nr_telefone, "");
-        reg_clie.conta_bancaria = nova_conta;
+        // Atribui os dados do cliente
+        novo_cliente.cd_cliente = nova_conta.codigo_conta;
+        novo_cliente.conta_bancaria = nova_conta;
+        obter_data_atual(novo_cliente.dt_cadastro);
 
         // Atualiza a lista com o novo nó
-        p->conteudo = reg_clie;
+        p->conteudo = novo_cliente;
         p->proximo = L->Primeiro;
         L->Primeiro = p;
-        if (L->Ultimo == NULL)
-        {
+        if (L->Ultimo == NULL) {
             L->Ultimo = L->Primeiro;
         }
 
+        // Salva imediatamente após cadastrar
+        Salvar(L);
+
         // Exibe mensagem de sucesso
-        gotoxy(07, 23);
-        printf("Conta bancaria cadastrada com sucesso!");
+        gotoxy(7, 23);
+        printf("Conta bancaria e cliente cadastrados com sucesso!");
         getch();
-    }
-    else
-    {
+    } else {
         // Caso o usuário não queira gravar os dados
-        gotoxy(07, 23);
+        gotoxy(7, 23);
         printf("Cadastro cancelado.");
         getch();
     }

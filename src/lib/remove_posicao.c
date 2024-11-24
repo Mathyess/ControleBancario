@@ -21,11 +21,17 @@ void remove_posicao(TipoLista *L)
     int cont;
     int qtde;
 
+    if (L == NULL) {
+        printf("Erro: Lista invalida!\n");
+        getch();
+        return;
+    }
+
     // Verifica se a lista está vazia
-    if (L->Primeiro == NULL)
-    {
+    if (L->Primeiro == NULL) {
         tela_conta_bancaria();
-        gotoxy(20, 03);
+        SetCor(9, 0); // Define azul claro para toda a interface
+        gotoxy(20, 3);
         printf("REMOVER CONTA BANCARIA");
         gotoxy(8, 23);
         printf("Lista vazia!");
@@ -33,12 +39,12 @@ void remove_posicao(TipoLista *L)
         return;
     }
 
-    do
-    {
+    do {
         tela_conta_bancaria();
-        gotoxy(20, 03);
+        SetCor(9, 0); // Define azul claro para toda a interface
+        gotoxy(20, 3);
         printf("REMOVER CONTA BANCARIA");
-        gotoxy(60, 03);
+        gotoxy(60, 3);
         qtde = conta_elementos(L);
         printf("Total Contas: %d", qtde);
 
@@ -48,17 +54,15 @@ void remove_posicao(TipoLista *L)
         getchar(); // Limpa o buffer
 
         // Opção para cancelar
-        if (Posicao == 0)
-        {
+        if (Posicao == 0) {
             gotoxy(8, 23);
             printf("Operacao cancelada.");
             getch();
             return;
         }
 
-        if (Posicao > qtde || Posicao < 0)
-        {
-            gotoxy(07, 23);
+        if (Posicao > qtde || Posicao < 0) {
+            gotoxy(7, 23);
             printf("                                                    ");
             gotoxy(8, 23);
             printf("Posicao invalida. Tente novamente.");
@@ -67,18 +71,14 @@ void remove_posicao(TipoLista *L)
     } while (Posicao > qtde || Posicao <= 0);
 
     // Encontra o Elemento a ser removido e o Elemento anterior
-    if (Posicao == 1)
-    {
+    if (Posicao == 1) {
         r = L->Primeiro;
         p = r;
-    }
-    else
-    {
+    } else {
         r = L->Primeiro;
         p = r->proximo;
         cont = 1;
-        while (cont < Posicao - 1)
-        {
+        while (cont < Posicao - 1) {
             cont++;
             p = p->proximo;
             r = r->proximo;
@@ -87,50 +87,53 @@ void remove_posicao(TipoLista *L)
 
     // Mostra o Elemento a ser removido
     tela_conta_bancaria();
-    gotoxy(20, 03);
+    SetCor(9, 0); // Define azul claro para toda a interface
+    gotoxy(20, 3);
     printf("REMOVER CONTA BANCARIA");
 
+    // Mostra os detalhes do cliente e da conta
+    gotoxy(7, 5);
+    printf("Cliente: %s", p->conteudo.nm_cliente);
+    gotoxy(7, 6);
+    printf("Documento: %s", p->conteudo.nr_documento);
+    
     // Exibe os dados da conta bancária
     mostra_conta_bancaria(p->conteudo.conta_bancaria);
 
-    gotoxy(07, 23);
+    gotoxy(7, 23);
     printf("Deseja Remover a Conta Bancaria (1=Sim; 2=Nao): ");
     scanf("%d", &resp);
     getchar(); // Limpa o buffer
 
-    if (resp == 1)
-    {
-        if (Posicao == 1)
-        {
+    if (resp == 1) {
+        if (Posicao == 1) {
             L->Primeiro = p->proximo;
             // Se era o único elemento
-            if (L->Primeiro == NULL)
-            {
+            if (L->Primeiro == NULL) {
                 L->Ultimo = NULL;
             }
             free(p);
-        }
-        else
-        {
+        } else {
             r->proximo = p->proximo;
             // Se era o último elemento
-            if (p->proximo == NULL)
-            {
+            if (p->proximo == NULL) {
                 L->Ultimo = r;
             }
             free(p);
         }
-        gotoxy(07, 23);
+
+        // Salva as alterações imediatamente
+        Salvar(L);
+
+        gotoxy(7, 23);
         printf("                                                       ");
-        gotoxy(07, 23);
+        gotoxy(7, 23);
         printf("Conta Bancaria Removida com Sucesso.");
         getch();
-    }
-    else
-    {
-        gotoxy(07, 23);
+    } else {
+        gotoxy(7, 23);
         printf("                                                       ");
-        gotoxy(07, 23);
+        gotoxy(7, 23);
         printf("Operacao cancelada.");
         getch();
     }

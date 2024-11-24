@@ -13,14 +13,6 @@
 #include <conio.h>
 #include "../include/funcoes.h"
 
-void obter_data_hora(char *data, char *hora) {
-    time_t t = time(NULL);
-    struct tm *tm = localtime(&t);
-    
-    sprintf(data, "%02d/%02d/%04d", tm->tm_mday, tm->tm_mon + 1, tm->tm_year + 1900);
-    sprintf(hora, "%02d:%02d:%02d", tm->tm_hour, tm->tm_min, tm->tm_sec);
-}
-
 void realizar_debito(TipoLista *L, TipoListaMov *M) {
     int codigo_conta;
     double valor;
@@ -28,15 +20,21 @@ void realizar_debito(TipoLista *L, TipoListaMov *M) {
     char data[11], hora[9];
     TipoApontador conta;
     
+    if (L == NULL || M == NULL) {
+        printf("Erro: Lista invalida!\n");
+        getch();
+        return;
+    }
+
     tela();
-    gotoxy(20, 03);
+    SetCor(9, 0); // Define azul claro para toda a interface
+    gotoxy(20, 3);
     printf("REALIZAR DEBITO");
     
     // Solicita e valida o código da conta
     gotoxy(8, 8);
     printf("Digite o codigo da conta: ");
-    scanf("%d", &codigo_conta);
-    getchar(); // Limpa o buffer
+    codigo_conta = ler_inteiro();
     
     conta = pesquisa(L, codigo_conta);
     if (conta == NULL) {
@@ -45,6 +43,12 @@ void realizar_debito(TipoLista *L, TipoListaMov *M) {
         getch();
         return;
     }
+    
+    // Mostra os dados do cliente e da conta
+    gotoxy(8, 10);
+    printf("Cliente: %s", conta->conteudo.nm_cliente);
+    gotoxy(8, 11);
+    printf("Documento: %s", conta->conteudo.nr_documento);
     
     // Mostra os dados da conta
     mostra_conta_bancaria(conta->conteudo.conta_bancaria);
@@ -57,6 +61,12 @@ void realizar_debito(TipoLista *L, TipoListaMov *M) {
     
     // Verifica se há saldo suficiente (considerando o limite)
     double saldo_disponivel = conta->conteudo.conta_bancaria.vl_saldo + conta->conteudo.conta_bancaria.vl_limite;
+    if (valor <= 0) {
+        gotoxy(8, 23);
+        printf("Valor invalido!");
+        getch();
+        return;
+    }
     if (valor > saldo_disponivel) {
         gotoxy(8, 23);
         printf("Saldo e limite insuficientes!");
@@ -105,6 +115,10 @@ void realizar_debito(TipoLista *L, TipoListaMov *M) {
     // Atualiza o saldo da conta
     conta->conteudo.conta_bancaria.vl_saldo -= valor;
     
+    // Salva as alterações imediatamente
+    Salvar(L);
+    salvar_movimentacoes(M);
+
     gotoxy(8, 23);
     printf("Debito realizado com sucesso!");
     getch();

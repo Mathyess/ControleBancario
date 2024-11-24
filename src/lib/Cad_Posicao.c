@@ -17,19 +17,25 @@ void cad_posicao(TipoLista *L)
     TipoApontador p;
     TipoApontador r;
     TipoApontador aux1;
-    reg_cliente reg_clie;
+    reg_cliente novo_cliente;
     conta_bancaria nova_conta;
     int resp;
     int Posicao;
     int cont;
     int qtde;
 
-    do
-    {
+    if (L == NULL) {
+        printf("Erro: Lista invalida!\n");
+        getch();
+        return;
+    }
+
+    do {
         tela_conta_bancaria();
-        gotoxy(20, 03);
+        SetCor(9, 0); // Define azul claro para toda a interface
+        gotoxy(20, 3);
         printf("CADASTRAR CONTA BANCARIA");
-        gotoxy(60, 03);
+        gotoxy(60, 3);
         qtde = conta_elementos(L);
         printf("Total Contas.: %d", qtde);
 
@@ -39,9 +45,8 @@ void cad_posicao(TipoLista *L)
         getchar(); // Limpa o buffer
 
         // Verifica se a posição informada é válida
-        if (Posicao <= 0 || Posicao > qtde + 1) 
-        {
-            gotoxy(07, 23);
+        if (Posicao <= 0 || Posicao > qtde + 1) {
+            gotoxy(7, 23);
             printf("                                                    ");
             gotoxy(8, 23);
             printf("Posicao invalida. Tente novamente.");
@@ -49,27 +54,24 @@ void cad_posicao(TipoLista *L)
         }
     } while (Posicao <= 0 || Posicao > qtde + 1);
 
-    if (Posicao > 0)
-    {
+    if (Posicao > 0) {
         // Verifica se o código da conta já está cadastrado
-        do
-        {
-            gotoxy(30, 05);
+        do {
+            gotoxy(30, 5);
             printf("           ");
-            gotoxy(07, 23);
+            gotoxy(7, 23);
             printf("Digite o codigo da conta: ");
             scanf("%d", &nova_conta.codigo_conta);
             getchar(); // Limpa o buffer
             
             aux1 = verificar_codigo_conta(L, nova_conta.codigo_conta);
-            if (aux1 != NULL)
-            {
-                gotoxy(07, 23);
+            if (aux1 != NULL) {
+                gotoxy(7, 23);
                 printf("                                            ");
-                gotoxy(07, 23);
+                gotoxy(7, 23);
                 printf("Erro: O codigo %d ja esta cadastrado.", nova_conta.codigo_conta);
                 getch();
-                gotoxy(07, 23);
+                gotoxy(7, 23);
                 printf("                                            ");
             }
         } while (aux1 != NULL);
@@ -77,70 +79,60 @@ void cad_posicao(TipoLista *L)
         // Leitura dos dados da conta
         ler_dados_conta(&nova_conta);
 
+        // Leitura dos dados do cliente
+        system("cls");
+        ler_dados_cliente(&novo_cliente);
+
         // Confirmação para gravar os dados
-        gotoxy(07, 23);
+        gotoxy(7, 23);
         printf("Deseja gravar os dados (1-Sim; 2-Nao).: ");
         scanf("%d", &resp);
         getchar(); // Limpa o buffer
 
-        if (resp == 1)
-        {
+        if (resp == 1) {
             r = (TipoApontador)malloc(sizeof(TipoItem));
-            if (r == NULL) 
-            {
-                gotoxy(07, 23);
+            if (r == NULL) {
+                gotoxy(7, 23);
                 printf("Erro ao alocar memoria.");
                 getch();
                 return;
             }
 
-            // Inicializa os dados do cliente com valores vazios
-            reg_clie.cd_cliente = nova_conta.codigo_conta;
-            strcpy(reg_clie.nm_cliente, "");
-            strcpy(reg_clie.ds_endereco, "");
-            reg_clie.nr_numero = 0;
-            strcpy(reg_clie.nr_documento, "");
-            strcpy(reg_clie.ds_cidade, "");
-            strcpy(reg_clie.cd_uf, "");
-            strcpy(reg_clie.dt_cadastro, "");
-            strcpy(reg_clie.nr_telefone, "");
-            reg_clie.conta_bancaria = nova_conta;
+            // Atribui os dados do cliente
+            novo_cliente.cd_cliente = nova_conta.codigo_conta;
+            novo_cliente.conta_bancaria = nova_conta;
+            obter_data_atual(novo_cliente.dt_cadastro);
 
             // Move os dados para o ponteiro r
-            r->conteudo = reg_clie;
+            r->conteudo = novo_cliente;
 
             // Insere o registro na lista na posição desejada
-            if (Posicao == 1) // Inserir no início
-            {
+            if (Posicao == 1) { // Inserir no início
                 r->proximo = L->Primeiro;
                 L->Primeiro = r;
-                if (L->Ultimo == NULL) // Se a lista estava vazia
-                {
+                if (L->Ultimo == NULL) { // Se a lista estava vazia
                     L->Ultimo = r;
                 }
-            }
-            else // Inserir em qualquer outra posição
-            {
+            } else { // Inserir em qualquer outra posição
                 p = L->Primeiro;
-                for (cont = 1; cont < Posicao - 1; cont++)
-                {
+                for (cont = 1; cont < Posicao - 1; cont++) {
                     p = p->proximo;
                 }
                 r->proximo = p->proximo;
                 p->proximo = r;
-                if (r->proximo == NULL) // Se inserido na última posição
-                {
+                if (r->proximo == NULL) { // Se inserido na última posição
                     L->Ultimo = r;
                 }
             }
 
-            gotoxy(07, 23);
-            printf("Conta bancaria cadastrada com sucesso!");
+            // Salva imediatamente após cadastrar
+            Salvar(L);
+
+            gotoxy(7, 23);
+            printf("Conta bancaria e cliente cadastrados com sucesso!");
             getch();
-        }
-        else
-        {
-            gotoxy(07, 23);
+        } else {
+            gotoxy(7, 23);
             printf("Cadastro cancelado.");
             getch();
         }
