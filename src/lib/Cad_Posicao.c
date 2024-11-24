@@ -4,6 +4,7 @@
     Turma: Engenharia de Software 2A
     RA Matheus Alende Pires     168649-2024
     RA Pedro Henrique Pinheiro  179381-2024
+    Objetivo: Função para cadastrar uma conta numa posição específica da lista
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -31,7 +32,6 @@ TipoApontador p;
 
     do {
         tela_conta_bancaria();
-        SetCor(9, 0); // Define azul claro para toda a interface
         gotoxy(20, 3);
         printf("CADASTRAR CONTA BANCARIA");
         gotoxy(60, 3);
@@ -61,6 +61,8 @@ TipoApontador p;
             gotoxy(7, 23);
             printf("Digite o codigo da conta: ");
             scanf("%d", &nova_conta.codigo_conta);
+            gotoxy(30, 05);
+            printf("%d", nova_conta.codigo_conta);
             getchar(); // Limpa o buffer
             
             aux1 = verificar_codigo_conta(L, nova_conta.codigo_conta);

@@ -4,6 +4,8 @@
     Turma: Engenharia de Software 2A
     RA Matheus Alende Pires     168649-2024
     RA Pedro Henrique Pinheiro  179381-2024
+
+    Objetivo: Função para alterar uma conta previamente cadastrada.
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,7 +30,7 @@ void altera_conta(TipoLista *L) {
     p = L->Primeiro;
     if (p == NULL) {
         tela();
-        SetCor(9, 0); // Define azul claro para toda a interface
+
         gotoxy(8, 23);
         printf("LISTA VAZIA...");
         getch();
@@ -39,7 +41,7 @@ void altera_conta(TipoLista *L) {
     do {
         tela();
         tela_conta_bancaria();
-        SetCor(9, 0); // Define azul claro para toda a interface
+
         gotoxy(25, 3);
         printf("ALTERACAO DADOS DA CONTA");
         gotoxy(60, 3);

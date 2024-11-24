@@ -4,6 +4,7 @@
     Turma: Engenharia de Software 2A
     RA Matheus Alende Pires     168649-2024
     RA Pedro Henrique Pinheiro  179381-2024
+    Objetivo: Função para salvar os dados dos clientes em um arquivo .dat
 */
 #include <stdio.h>
 #include <string.h>

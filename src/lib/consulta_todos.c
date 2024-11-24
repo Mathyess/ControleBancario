@@ -1,5 +1,5 @@
 /*  
-    Alunos: Matheus Alende Pires, Pedro Henrique Pinheiro
+    Alunos: Matheus Alende Pires
     Data: 28/09/2022
     Turma: Engenharia de Software 2A
     RA Matheus Alende Pires     168649-2024
@@ -10,13 +10,6 @@
     - Relatório geral de contas
     - Relatório de contas inativas
     - Relatório de limites de crédito
-    
-    Características:
-    - Formatação tabular dos dados
-    - Paginação automática para grandes volumes de dados
-    - Filtragem específica para cada tipo de relatório
-    - Cálculo de valores disponíveis (saldo + limite)
-    - Exibição em azul claro para melhor legibilidade
 */
 
 #include <stdio.h>
@@ -35,7 +28,6 @@ void consulta_todos(TipoLista *L, char msg[40])
 
     // Limpa a tela e exibe o título da consulta
     tela();
-    SetCor(9, 0); // Texto azul claro para toda a interface
     gotoxy(22, 03);
     printf("%s", msg);
 

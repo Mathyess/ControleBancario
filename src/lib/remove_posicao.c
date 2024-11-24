@@ -4,6 +4,7 @@
     Turma: Engenharia de Software 2A
     RA Matheus Alende Pires     168649-2024
     RA Pedro Henrique Pinheiro  179381-2024
+    Objetivo: Função para remover contas numa posição específica da lista
 */
 #include <stdio.h>
 #include <string.h>
@@ -30,7 +31,6 @@ void remove_posicao(TipoLista *L)
     // Verifica se a lista está vazia
     if (L->Primeiro == NULL) {
         tela_conta_bancaria();
-        SetCor(9, 0); // Define azul claro para toda a interface
         gotoxy(20, 3);
         printf("REMOVER CONTA BANCARIA");
         gotoxy(8, 23);
@@ -41,7 +41,6 @@ void remove_posicao(TipoLista *L)
 
     do {
         tela_conta_bancaria();
-        SetCor(9, 0); // Define azul claro para toda a interface
         gotoxy(20, 3);
         printf("REMOVER CONTA BANCARIA");
         gotoxy(60, 3);
@@ -87,7 +86,6 @@ void remove_posicao(TipoLista *L)
 
     // Mostra o Elemento a ser removido
     tela_conta_bancaria();
-    SetCor(9, 0); // Define azul claro para toda a interface
     gotoxy(20, 3);
     printf("REMOVER CONTA BANCARIA");
 

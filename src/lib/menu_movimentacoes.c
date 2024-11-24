@@ -4,6 +4,7 @@
     Turma: Engenharia de Software 2A
     RA Matheus Alende Pires     168649-2024
     RA Pedro Henrique Pinheiro  179381-2024
+    Objetivo: Função de menu de todas as opções de movimentação
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -36,7 +37,6 @@ void menu_movimentacoes(TipoLista *L, TipoListaMov *M) {
     
     do {
         tela();
-        SetCor(9, 0); // Define azul claro para toda a interface
         
         gotoxy(20, 3);
         printf("MENU DE MOVIMENTACOES BANCARIAS");

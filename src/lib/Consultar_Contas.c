@@ -4,6 +4,7 @@
     Turma: Engenharia de Software 2A
     RA Matheus Alende Pires     168649-2024
     RA Pedro Henrique Pinheiro  179381-2024
+    Objetivo: Função para consultar uma conta específica
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -42,7 +43,7 @@ void consultar_cliente(TipoLista *L)
 
         // Solicita o código da conta
         gotoxy(30, 05);
-        printf("Digite o código da conta: ");
+        printf("Digite o codigo da conta: ");
         scanf("%d", &codigo);
         getchar();  // Para capturar o ENTER após o código
 

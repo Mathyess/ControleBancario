@@ -4,6 +4,7 @@
     Turma: Engenharia de Software 2A
     RA Matheus Alende Pires     168649-2024
     RA Pedro Henrique Pinheiro  179381-2024
+    Objetivo: Função para remover contas no início da lista
 */
 #include <stdio.h>
 #include <string.h>
@@ -27,7 +28,6 @@ void remove_inicio(TipoLista *L)
 
     if (p == NULL) {
         tela();
-        SetCor(9, 0); // Define azul claro para toda a interface
         gotoxy(8, 23);
         printf("LISTA VAZIA..");
         getch();
@@ -35,7 +35,6 @@ void remove_inicio(TipoLista *L)
     }
 
     tela_conta_bancaria();
-    SetCor(9, 0); // Define azul claro para toda a interface
     gotoxy(20, 3);
     printf("REMOVER CONTA BANCARIA INICIO");
 

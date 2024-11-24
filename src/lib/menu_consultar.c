@@ -29,7 +29,6 @@ void menu_consultar(TipoLista *L)
     do
     {
         tela();
-        SetCor(9, 0); // Texto azul claro para toda a interface
         gotoxy(20, 03);
         printf("SUBMENU CONSULTA");
         

@@ -35,9 +35,8 @@ void tela_conta_bancaria()
 {
     tela();  // Chama a função de tela base
     
-    SetCor(9, 0); // Texto azul claro para toda a interface
     gotoxy(07, 05);
-    printf("Codigo da Conta.: ");
+    printf("Codigo da Conta......: ");
     
     gotoxy(07, 07);
     printf("1- Banco.............: ");
@@ -64,7 +63,6 @@ void tela_conta_bancaria()
 // Função para mostrar os detalhes de uma conta bancária
 void mostra_conta_bancaria(conta_bancaria conta)
 {
-    SetCor(9, 0); // Texto azul claro para todos os dados
     
     gotoxy(30, 05);
     printf("%d", conta.codigo_conta);

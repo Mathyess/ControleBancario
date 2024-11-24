@@ -4,6 +4,7 @@
     Turma: Engenharia de Software 2A
     RA Matheus Alende Pires     168649-2024
     RA Pedro Henrique Pinheiro  179381-2024
+    Objetivo: Função para cadastrar uma conta no final da lista
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -31,6 +32,8 @@ void cadastrar(TipoLista *L) {
         gotoxy(7, 23);
         printf("Digite o codigo da conta bancaria: ");
         scanf("%d", &nova_conta.codigo_conta);
+        gotoxy(30, 05);
+        printf("%d", nova_conta.codigo_conta);
         getchar(); // Limpa o buffer
         
         aux1 = verificar_codigo_conta(L, nova_conta.codigo_conta);
@@ -89,9 +92,13 @@ void cadastrar(TipoLista *L) {
         Salvar(L);
 
         gotoxy(7, 23);
+        printf("                                                       ");
+        gotoxy(7, 23);
         printf("Conta bancaria cadastrada com sucesso!");
         getch();
     } else {
+        gotoxy(7, 23);
+        printf("                                                       ");
         gotoxy(7, 23);
         printf("Cadastro cancelado.");
         getch();

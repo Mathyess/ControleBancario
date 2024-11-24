@@ -4,6 +4,7 @@
     Turma: Engenharia de Software 2A
     RA Matheus Alende Pires     168649-2024
     RA Pedro Henrique Pinheiro  179381-2024
+    Objetivo: Funçao para consultar contas em ordem
 */
 #include <stdio.h>
 #include <stdlib.h>

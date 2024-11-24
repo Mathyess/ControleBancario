@@ -4,6 +4,7 @@
     Turma: Engenharia de Software 2A
     RA Matheus Alende Pires     168649-2024
     RA Pedro Henrique Pinheiro  179381-2024
+    Objetivo: Função para ler os dados previamente registrados de uma conta
 */
 #include <stdio.h>
 #include <string.h>
@@ -73,7 +74,6 @@ void ler_dados_conta(conta_bancaria *conta) {
 void ler_dados_completos(conta_bancaria *conta, reg_cliente *cliente) {
     // Tela da conta bancária
     tela_conta_bancaria();
-    SetCor(9, 0);
 
     // Lê os dados da conta bancária
     ler_dados_conta(conta);
@@ -81,7 +81,6 @@ void ler_dados_completos(conta_bancaria *conta, reg_cliente *cliente) {
     // Lê os dados do cliente
     system("cls");
     tela_clie();
-    SetCor(9, 0);
     gotoxy(20, 3);
     printf("CADASTRO DE CLIENTE");
 

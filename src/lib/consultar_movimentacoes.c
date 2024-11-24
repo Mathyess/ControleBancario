@@ -4,6 +4,7 @@
     Turma: Engenharia de Software 2A
     RA Matheus Alende Pires     168649-2024
     RA Pedro Henrique Pinheiro  179381-2024
+    Objetivo: Função para consultar as movimentações de uma conta
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,7 +24,6 @@ void consultar_movimentacoes(TipoListaMov *M) {
     }
 
     tela();
-    SetCor(9, 0); // Define azul claro para toda a interface
     gotoxy(20, 3);
     printf("CONSULTA DE MOVIMENTACOES BANCARIAS");
     
@@ -106,7 +106,6 @@ void consultar_movimentacoes(TipoListaMov *M) {
             
             // Limpa a tela e reimprime o cabeçalho
             limpa_tela();
-            SetCor(9, 0); // Mantém a cor azul claro
             gotoxy(20, 3);
             printf("CONSULTA DE MOVIMENTACOES BANCARIAS");
             gotoxy(2, 5);

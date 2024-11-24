@@ -4,6 +4,7 @@
     Turma: Engenharia de Software 2A
     RA Matheus Alende Pires     168649-2024
     RA Pedro Henrique Pinheiro  179381-2024
+    Objetivo: Função para o menu geral de opções
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -18,7 +19,6 @@ void menu_contas_bancarias(TipoLista *L) {  // Recebe a lista como parâmetro
 
     do {
         tela();  // Exibe a tela inicial
-        SetCor(9, 0); // Define azul claro para todo o texto
         gotoxy(20, 3);  // Move o cursor para a posição X=20, Y=03
         printf("MENU PRINCIPAL - CONTAS BANCARIAS");
         
@@ -76,13 +76,11 @@ case 1:
                 menu_consultar(L);  // Chama o menu de consulta
                 break;
             case 9:
-                SetCor(9, 0);
                 printf("Voltando ao menu inicial...\n");
                 Salvar(L);  // Salva antes de sair
                 getch();
                 return;     // Retorna ao invés de chamar menu_inicial recursivamente
             default:
-                SetCor(9, 0);
                 printf("Opcao invalida! Tente novamente.\n");
                 getch();
                 break;
@@ -101,7 +99,6 @@ void menu_inicial() {
     int opcao;
     do {
         tela();
-        SetCor(9, 0); // Define azul claro para todo o texto
         gotoxy(10, 10);
         printf("1. Contas Bancarias");
         gotoxy(10, 12);
@@ -109,7 +106,7 @@ void menu_inicial() {
         gotoxy(10, 14);
         printf("3. Sair do Programa");
 
-        gotoxy(10, 18);
+        gotoxy(8, 23);
         printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
         getchar(); // Limpa o buffer
@@ -124,12 +121,10 @@ void menu_inicial() {
                 break;
             case 3:
                 Salvar(&L);  // Salva antes de sair
-                SetCor(9, 0);
                 printf("\nSaindo do programa...\n");
                 exit(0);
                 break;
             default:
-                SetCor(9, 0);
                 printf("\nOpcao invalida! Tente novamente.\n");
                 getch();
                 break;

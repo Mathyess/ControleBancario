@@ -28,10 +28,6 @@
 #include <windows.h>
 #include "../include/funcoes.h"
 
-// Função para alterar as cores no console
-void SetCor(int corTexto, int corFundo) {
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (corFundo << 4) | corTexto);
-}
 
 // Mostra a Tela Padrao
 void tela()
@@ -41,7 +37,6 @@ void tela()
     system("color 09"); // Define o fundo preto (0) e texto azul claro (9) como padrão do sistema
     
     // Definir a cor do texto e fundo
-    SetCor(9, 0); // Texto azul claro, fundo preto
     
     gotoxy(01, 01);
     printf("+-----------------------------------------------------------------------------+");

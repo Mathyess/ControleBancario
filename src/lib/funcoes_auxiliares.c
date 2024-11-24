@@ -4,6 +4,8 @@
     Turma: Engenharia de Software 2A
     RA Matheus Alende Pires     168649-2024
     RA Pedro Henrique Pinheiro  179381-2024
+    Objetivo: Funções diversas, que incluem a função de pausa (aguardar input do usuário) e obter a data e hora atual
+
 */
 #include <stdio.h>
 #include <stdlib.h>
