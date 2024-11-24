@@ -12,7 +12,7 @@
 #include <conio.h>
 #include "../include/funcoes.h"
 
-void consultar_cliente(TipoLista *L)
+void consultar_conta(TipoLista *L)
 {
     TipoApontador p;
     int codigo;
@@ -59,8 +59,8 @@ void consultar_cliente(TipoLista *L)
 
     } while (p == NULL);  // Continua pedindo até encontrar a conta
 
-    // Exibe os dados da conta encontrada
-    mostra_cliente(p->conteudo);
+// Exibe os dados da conta encontrada
+    mostra_conta_bancaria(p->conteudo.conta_bancaria);
 
     // Pausa a execução para o usuário visualizar os dados
     gotoxy(10, 23);

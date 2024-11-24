@@ -6,7 +6,7 @@
     RA Pedro Henrique Pinheiro  179381-2024
     Objetivo: Função para mover o cursor para uma posição específica da tela
 */
-0#include <windows.h>
+#include <windows.h>
 #include <conio.h>
 #include "../include/funcoes.h"
 #include <stdio.h>

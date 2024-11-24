@@ -5,13 +5,13 @@
     RA Matheus Alende Pires     168649-2024
     RA Pedro Henrique Pinheiro  179381-2024
     
-    Objetivo: Implementa o submenu de consultas do sistema bancário.
+Objetivo: Implementa o submenu de consultas do sistema bancário.
     Este módulo é responsável por gerenciar todas as operações de consulta,
     incluindo:
-    - Consulta geral de clientes
-    - Consulta ordenada por código
-    - Consulta ordenada por nome
-    - Consulta por código específico
+    - Consulta geral de contas bancárias
+    - Consulta de contas ordenadas por código
+    - Consulta de contas ordenadas por banco
+    - Consulta de conta por código específico
     - Consulta de contas inativas
     - Consulta de limites de crédito
 */
@@ -33,13 +33,13 @@ void menu_consultar(TipoLista *L)
         printf("SUBMENU CONSULTA");
         
         gotoxy(25, 8);
-        printf("1 - Consultar Fichario do Cliente Geral");
+printf("1 - Consultar Todas as Contas");
         gotoxy(25, 10);
-        printf("2 - Consultar em Ordem de Codigo");
+        printf("2 - Consultar Contas por Ordem de Codigo");
         gotoxy(25, 12);
-        printf("3 - Consultar em Ordem Alfabetica");
+        printf("3 - Consultar Contas por Ordem de Banco");
         gotoxy(25, 14);
-        printf("4 - Consultar o Codigo Especifico");
+        printf("4 - Consultar Conta por Codigo");
         gotoxy(25, 16);
         printf("5 - Consultar Contas Inativas");
         gotoxy(25, 18);
@@ -61,37 +61,37 @@ void menu_consultar(TipoLista *L)
         
         switch (opc)
         {
-        case 1:
-            consultar_cliente(L);
+case 1:
+            consultar(L);
             break;
         case 2:
             if (L->Primeiro == NULL) {
                 tela();
                 gotoxy(20, 03);
-                printf("CONSULTA LISTA CLIENTES - ORDEM DE CODIGO");
+                printf("CONSULTA DE CONTAS - ORDEM DE CODIGO");
                 gotoxy(07, 23);
                 printf("LISTA VAZIA..");
                 getch();
             } else {
                 ordena_codigo(L);
-                consulta_todos(L, "CONSULTA LISTA CLIENTES - ORDEM DE CODIGO");
+                consulta_todos(L, "CONSULTA DE CONTAS - ORDEM DE CODIGO");
             }
             break;
         case 3:
             if (L->Primeiro == NULL) {
                 tela();
                 gotoxy(20, 03);
-                printf("CONSULTA LISTA CLIENTES - ORDEM ALFABETICA");
+                printf("CONSULTA DE CONTAS - ORDEM DE BANCO");
                 gotoxy(07, 23);
                 printf("LISTA VAZIA..");
                 getch();
             } else {
                 ordena_nome(L);
-                consulta_todos(L, "CONSULTA LISTA CLIENTES - ORDEM ALFABETICA");
+                consulta_todos(L, "CONSULTA DE CONTAS - ORDEM DE BANCO");
             }
             break;
         case 4:
-            consultar_cliente(L);
+            consultar_conta(L);
             break;
         case 5:
             if (L->Primeiro == NULL) {

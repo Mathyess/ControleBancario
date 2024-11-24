@@ -77,6 +77,7 @@ void tela_movimentacao();
 void limpa_tela();
 void gotoxy(int x, int y);
 void SetCor(int corTexto, int corFundo);
+void mostra_conta_form(conta_bancaria conta);
 
 // Funções de manipulação de lista
 void cadastrar(TipoLista *L);
@@ -96,12 +97,11 @@ void ordena_nome(TipoLista *L);
 // Funções de consulta
 void consulta_todos(TipoLista *L, char msg[40]);
 void mostra_conta_bancaria(conta_bancaria conta);
-void mostra_cliente(reg_cliente cliente);
-void consultar_cliente(TipoLista *L);
+void consultar_conta(TipoLista *L);
+void consultar(TipoLista *L);
 
 // Funções de alteração
 void altera_conta(TipoLista *L);
-void altera_cliente(TipoLista *L);
 
 // Funções de menu
 void menu_inicial(void);

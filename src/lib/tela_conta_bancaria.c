@@ -20,9 +20,9 @@
       * Limite
       * Status da conta
     
-    Funções:
+Funções:
     - tela_conta_bancaria(): Exibe o formulário para entrada de dados
-    - mostra_conta_bancaria(): Exibe os dados de uma conta existente
+    - mostra_conta_form(): Exibe os dados de uma conta no formulário
 */
 
 #include <stdio.h>
@@ -60,8 +60,8 @@ void tela_conta_bancaria()
     printf("7- Status da Conta...: ");
 }
 
-// Função para mostrar os detalhes de uma conta bancária
-void mostra_conta_bancaria(conta_bancaria conta)
+// Função para mostrar os detalhes de uma conta bancária no formulário
+void mostra_conta_form(conta_bancaria conta)
 {
     
     gotoxy(30, 05);

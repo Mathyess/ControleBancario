@@ -5,11 +5,13 @@
             "label": "Compilar e Executar C",
             "type": "shell",
             "command": "gcc",
-            "args": [
+"args": [
                 "-g",
-                "${workspaceFolder}/*.c",
+                "-I${workspaceFolder}/src/include",
+                "${workspaceFolder}/src/main.c",
+                "${workspaceFolder}/src/lib/*.c",
                 "-o",
-                "${workspaceFolder}/output/bancario.exe"
+                "${workspaceFolder}/bin/main.exe"
             ],
             "group": {
                 "kind": "build",
@@ -21,7 +23,7 @@
         {
             "label": "Executar Programa",
             "type": "shell",
-            "command": "${workspaceFolder}/output/bancario.exe",
+"command": "${workspaceFolder}/bin/main.exe",
             "group": {
                 "kind": "test",
                 "isDefault": true
