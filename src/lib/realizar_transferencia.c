@@ -143,9 +143,38 @@ void realizar_transferencia(TipoLista *L, TipoListaMov *M) {
         M->Ultimo = novo;
     }
     
-    // Atualiza os saldos das contas
-    conta_origem->conteudo.conta_bancaria.vl_saldo -= valor;
-    conta_destino->conteudo.conta_bancaria.vl_saldo += valor;
+// Calcula quanto será debitado do saldo e quanto do limite da conta origem
+    double valor_do_saldo = 0;
+    double valor_do_limite = 0;
+
+    if (valor <= conta_origem->conteudo.conta_bancaria.vl_saldo) {
+        // Se tem saldo suficiente, debita apenas do saldo
+        valor_do_saldo = valor;
+    } else {
+        // Se não tem saldo suficiente, usa todo o saldo disponível e o restante do limite
+        valor_do_saldo = conta_origem->conteudo.conta_bancaria.vl_saldo;
+        valor_do_limite = valor - valor_do_saldo;
+    }
+
+    // Atualiza o saldo e limite da conta origem
+    conta_origem->conteudo.conta_bancaria.vl_saldo -= valor_do_saldo;
+    conta_origem->conteudo.conta_bancaria.vl_limite -= valor_do_limite;
+
+    // Verifica se há limite de crédito a ser restaurado na conta destino
+    double limite_usado = conta_destino->conteudo.conta_bancaria.vl_limite;
+    if (limite_usado < 0) {  // Se há limite usado (valor negativo)
+        double valor_para_limite = valor;
+        if (-limite_usado < valor) {  // Se o valor é maior que o limite usado
+            valor_para_limite = -limite_usado;  // Restaura apenas o necessário
+        }
+        // Restaura o limite
+        conta_destino->conteudo.conta_bancaria.vl_limite += valor_para_limite;
+        // O restante vai para o saldo
+        conta_destino->conteudo.conta_bancaria.vl_saldo += (valor - valor_para_limite);
+    } else {
+        // Se não há limite usado, todo o valor vai para o saldo
+        conta_destino->conteudo.conta_bancaria.vl_saldo += valor;
+    }
     
     // Salva as alterações imediatamente
     Salvar(L);

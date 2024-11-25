@@ -59,19 +59,34 @@ void realizar_debito(TipoLista *L, TipoListaMov *M) {
     scanf("%lf", &valor);
     getchar(); // Limpa o buffer
     
-    // Verifica se há saldo suficiente (considerando o limite)
-    double saldo_disponivel = conta->conteudo.conta_bancaria.vl_saldo + conta->conteudo.conta_bancaria.vl_limite;
+// Verifica se o valor é válido
     if (valor <= 0) {
         gotoxy(8, 23);
         printf("Valor invalido!");
         getch();
         return;
     }
+
+    // Verifica se há saldo suficiente (considerando o limite)
+    double saldo_disponivel = conta->conteudo.conta_bancaria.vl_saldo + conta->conteudo.conta_bancaria.vl_limite;
     if (valor > saldo_disponivel) {
         gotoxy(8, 23);
         printf("Saldo e limite insuficientes!");
         getch();
         return;
+    }
+
+    // Calcula quanto será debitado do saldo e quanto do limite
+    double valor_do_saldo = 0;
+    double valor_do_limite = 0;
+
+    if (valor <= conta->conteudo.conta_bancaria.vl_saldo) {
+        // Se tem saldo suficiente, debita apenas do saldo
+        valor_do_saldo = valor;
+    } else {
+        // Se não tem saldo suficiente, usa todo o saldo disponível e o restante do limite
+        valor_do_saldo = conta->conteudo.conta_bancaria.vl_saldo;
+        valor_do_limite = valor - valor_do_saldo;
     }
     
     // Solicita a descrição da operação
@@ -112,8 +127,9 @@ void realizar_debito(TipoLista *L, TipoListaMov *M) {
         M->Ultimo = novo;
     }
     
-    // Atualiza o saldo da conta
-    conta->conteudo.conta_bancaria.vl_saldo -= valor;
+// Atualiza o saldo e limite da conta
+    conta->conteudo.conta_bancaria.vl_saldo -= valor_do_saldo;
+    conta->conteudo.conta_bancaria.vl_limite -= valor_do_limite;
     
     // Salva as alterações imediatamente
     Salvar(L);

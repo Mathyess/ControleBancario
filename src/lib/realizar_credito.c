@@ -104,8 +104,21 @@ void realizar_credito(TipoLista *L, TipoListaMov *M) {
         M->Ultimo = novo;
     }
     
-    // Atualiza o saldo da conta
-    conta->conteudo.conta_bancaria.vl_saldo += valor;
+// Verifica se há limite de crédito a ser restaurado
+    double limite_usado = conta->conteudo.conta_bancaria.vl_limite;
+    if (limite_usado < 0) {  // Se há limite usado (valor negativo)
+        double valor_para_limite = valor;
+        if (-limite_usado < valor) {  // Se o valor é maior que o limite usado
+            valor_para_limite = -limite_usado;  // Restaura apenas o necessário
+        }
+        // Restaura o limite
+        conta->conteudo.conta_bancaria.vl_limite += valor_para_limite;
+        // O restante vai para o saldo
+        conta->conteudo.conta_bancaria.vl_saldo += (valor - valor_para_limite);
+    } else {
+        // Se não há limite usado, todo o valor vai para o saldo
+        conta->conteudo.conta_bancaria.vl_saldo += valor;
+    }
     
     // Salva as alterações imediatamente
     Salvar(L);
