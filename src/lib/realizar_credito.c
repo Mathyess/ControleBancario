@@ -27,9 +27,9 @@ void realizar_credito(TipoLista *L, TipoListaMov *M) {
         return;
     }
 
-    tela();
+    tela();  
     gotoxy(20, 3);
-    printf("REALIZAR CREDITO");
+    printf("      REALIZAR CREDITO");  
     
     // Solicita e valida o código da conta
     gotoxy(8, 8);
@@ -47,7 +47,7 @@ void realizar_credito(TipoLista *L, TipoListaMov *M) {
     // Mostra os dados da conta
     mostra_conta_bancaria(conta->conteudo);
     
-// Solicita o valor do crédito
+    // Solicita o valor do crédito
     gotoxy(8, 19);
     printf("Digite o valor do credito: R$ ");
     scanf("%lf", &valor);
@@ -98,7 +98,7 @@ void realizar_credito(TipoLista *L, TipoListaMov *M) {
         M->Ultimo = novo;
     }
     
-// Verifica se a conta tem limite de crédito
+    // Verifica se a conta tem limite de crédito
     if (conta->conteudo.vl_limite <= 0) {
         gotoxy(8, 23);
         printf("Conta sem limite de credito disponivel!");
@@ -117,7 +117,7 @@ void realizar_credito(TipoLista *L, TipoListaMov *M) {
     // Usa apenas o limite de crédito
     conta->conteudo.vl_limite -= valor;
     
-// Atualiza o status da conta para ativa
+    // Atualiza o status da conta para ativa
     strcpy(conta->conteudo.status, "ATIVA");
     
     // Salva as alterações imediatamente

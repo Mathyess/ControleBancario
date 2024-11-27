@@ -34,15 +34,15 @@ void remove_inicio(TipoLista *L)
         return;
     }
 
-    tela_conta_bancaria();
+tela();  // Usa a tela base para limpar
     gotoxy(20, 3);
-    printf("REMOVER CONTA BANCARIA INICIO");
+    printf("REMOVER CONTA BANCARIA NO INICIO");
     
-    // Mostra os detalhes da conta bancária
+    // Exibe os dados da conta bancária
     mostra_conta_bancaria(p->conteudo);
 
     gotoxy(7, 23);
-    printf("Deseja Remover a Conta Bancaria no Inicio (1=Sim; 2=Nao): ");
+    printf("Confirma remocao da conta? (1=Sim; 2=Nao): ");
     scanf("%d", &resp);
     getchar(); // Limpa o buffer
 

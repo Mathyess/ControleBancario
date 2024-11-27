@@ -31,10 +31,10 @@ void consultar_conta(TipoLista *L)
     
     do
     {
-        tela();
+        tela(); 
         tela_conta_bancaria();
         gotoxy(25, 03);
-        printf("CONSULTAR CONTA ESPECIFICA");
+        printf("      CONSULTAR CONTA ESPECIFICA"); 
 
         // Exibe o total de contas cadastradas
         qtde = conta_elementos(L);

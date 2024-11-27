@@ -30,9 +30,9 @@ void remove_posicao(TipoLista *L)
 
     // Verifica se a lista está vazia
     if (L->Primeiro == NULL) {
-        tela_conta_bancaria();
+tela_conta_bancaria();  // Clear the screen
         gotoxy(20, 3);
-        printf("REMOVER CONTA BANCARIA");
+        printf("      REMOVER CONTA BANCARIA");  // Centered title
         gotoxy(8, 23);
         printf("Lista vazia!");
         getch();
@@ -84,8 +84,8 @@ void remove_posicao(TipoLista *L)
         }
     }
 
-    // Mostra o Elemento a ser removido
-    tela_conta_bancaria();
+// Mostra o Elemento a ser removido
+    tela();  // Usa a tela base para limpar
     gotoxy(20, 3);
     printf("REMOVER CONTA BANCARIA");
     
@@ -93,7 +93,7 @@ void remove_posicao(TipoLista *L)
     mostra_conta_bancaria(p->conteudo);
 
     gotoxy(7, 23);
-    printf("Deseja Remover a Conta Bancaria (1=Sim; 2=Nao): ");
+    printf("Confirma remocao da conta? (1=Sim; 2=Nao): ");
     scanf("%d", &resp);
     getchar(); // Limpa o buffer
 

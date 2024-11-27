@@ -29,9 +29,9 @@ int codigo_conta;
         return;
     }
 
-    tela();
+    tela();  
     gotoxy(20, 3);
-    printf("REALIZAR DEBITO");
+    printf("      REALIZAR DEBITO");  
     
     // Solicita e valida o código da conta
     gotoxy(8, 8);
@@ -63,7 +63,7 @@ int codigo_conta;
         return;
     }
 
-// Para débito, só pode usar o saldo disponível
+    // Para débito, só pode usar o saldo disponível
     if (valor > conta->conteudo.vl_saldo) {
         gotoxy(8, 23);
         printf("Saldo insuficiente para debito!");
@@ -75,7 +75,7 @@ int codigo_conta;
     valor_do_saldo = valor;
     valor_do_limite = 0;
     
-// Solicita a descrição da operação
+    // Solicita a descrição da operação
     gotoxy(8, 21);
     printf("Digite a descricao: ");
     fgets(descricao, sizeof(descricao), stdin);
@@ -113,7 +113,7 @@ int codigo_conta;
         M->Ultimo = novo;
     }
     
-// Atualiza o saldo e limite da conta
+    // Atualiza o saldo e limite da conta
     conta->conteudo.vl_saldo -= valor_do_saldo;
     conta->conteudo.vl_limite -= valor_do_limite;
     

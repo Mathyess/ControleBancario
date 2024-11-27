@@ -60,7 +60,7 @@ if (is_limit_report) {
         // Enquanto houver contas na lista, exibe seus dados
         while (p != NULL)
         {
-// Se for relatório de inativas, só mostra as inativas
+            // Se for relatório de inativas, só mostra as inativas
             if (is_inactive_report) {
                 // Se é relatório de inativas e a conta não é inativa, pula
                 if (strcmp(p->conteudo.status, "INATIVA") != 0) {
@@ -95,8 +95,8 @@ if (is_limit_report) {
                 gotoxy(80, lin);
                 printf("%10.2f", disponivel);
             } else {
-// Relatório padrão ou de inativas
-gotoxy(02, lin);
+                // Relatório padrão ou de inativas
+                gotoxy(02, lin);
                 printf("%-6d", p->conteudo.codigo_conta);
                 gotoxy(10, lin);
                 printf("%-13s", p->conteudo.banco);
@@ -127,7 +127,7 @@ gotoxy(02, lin);
                 printf("%s", msg);
 
                 gotoxy(02, 05);
-if (is_limit_report) {
+                if (is_limit_report) {
                     printf("Codigo  Banco         Agencia    Conta         Tipo        Limite      Saldo     Disponivel");
                     gotoxy(02, 06);
                     printf("------ ------------ ---------- ------------ ----------- ----------- ---------- ------------");

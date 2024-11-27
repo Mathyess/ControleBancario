@@ -29,9 +29,9 @@ void realizar_transferencia(TipoLista *L, TipoListaMov *M) {
         return;
     }
 
-    tela();
+    tela();  
     gotoxy(20, 3);
-    printf("REALIZAR TRANSFERENCIA");
+    printf("      REALIZAR TRANSFERENCIA");  
     
     // Solicita e valida a conta de origem
     gotoxy(8, 8);
@@ -77,7 +77,7 @@ void realizar_transferencia(TipoLista *L, TipoListaMov *M) {
     gotoxy(50, 14);
     printf("Conta: %s", conta_destino->conteudo.numero_conta);
     
-// Pergunta se quer usar crédito ou débito
+    // Pergunta se quer usar crédito ou débito
     gotoxy(8, 16);
     printf("Usar credito ou debito? (C/D): ");
     char opcao;
@@ -97,7 +97,7 @@ void realizar_transferencia(TipoLista *L, TipoListaMov *M) {
         return;
     }
 
-// Verifica disponibilidade baseado na opção escolhida
+    // Verifica disponibilidade baseado na opção escolhida
     if (opcao == 'C' || opcao == 'c') {
         // Verifica se tem limite de crédito
         if (conta_origem->conteudo.vl_limite <= 0) {
