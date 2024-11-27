@@ -17,7 +17,7 @@ void tela_clie()
     tela();  // Chama a função de tela principal (presumivelmente define a tela inicial)
     
     gotoxy(07, 05);  // Posiciona o cursor na linha 5, coluna 7
-    printf("   Codigo da Conta: ");
+    printf("Codigo da Conta...: ");
     
     gotoxy(07, 07);  // Linha 7
     printf("1- Banco..........: ");  // Exibe o campo para o código do banco

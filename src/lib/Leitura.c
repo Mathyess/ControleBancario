@@ -39,6 +39,8 @@ void ler_string(char *destino, int tamanho) {
 
 // Função para ler os dados da conta bancária
 void ler_dados_conta(conta_bancaria *conta) {
+    gotoxy(30, 05);
+
     // Tela da conta bancária
     tela_conta_bancaria();
     
@@ -56,17 +58,13 @@ void ler_dados_conta(conta_bancaria *conta) {
 
     // Mostra as opções de tipo de conta
     gotoxy(30, 13);
-    printf("Opcoes de Tipo de Conta:");
-    gotoxy(30, 14);
-    printf("(1 - Poupanca, 2 - Corrente, 3 - Credito)\n");
-    gotoxy(30, 15);
-    printf("Escolha o tipo (1-3): ");
+    printf("(1 - Poupanca, 2 - Corrente, 3 - Credito): \n");
     
     int opcao;
     do {
         gotoxy(54, 15);
         printf("      "); // Limpa entrada anterior
-        gotoxy(54, 15);
+        gotoxy(73, 13);
         scanf("%d", &opcao);
         limpar_buffer();
     } while (opcao < 1 || opcao > 3);
@@ -126,14 +124,14 @@ void ler_dados_conta(conta_bancaria *conta) {
 
     // Lê o status da conta
     gotoxy(30, 21);
-    printf("(1-ATIVA 2-INATIVA - Escolha o status 1-2)");
+    printf("(1-ATIVA 2-INATIVA): ");
 
     
 int status_opcao;
     do {
         gotoxy(54, 23);
         printf("      "); // Limpa entrada anterior
-        gotoxy(54, 23);
+        gotoxy(51, 21);
         scanf("%d", &status_opcao);
         limpar_buffer();
         
