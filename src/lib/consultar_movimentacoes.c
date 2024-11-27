@@ -32,9 +32,9 @@ void consultar_movimentacoes(TipoListaMov *M) {
     
     // Exibe o cabeçalho da tabela
     gotoxy(2, 5);
-    printf("Cod    Data      Hora     Tipo           Origem  Destino    Valor R$  Descricao");
+    printf("Cod    Data      Hora     Tipo         Origem  Destino    Valor R$  Descricao");
     gotoxy(2, 6);
-    printf("------ --------- -------- -------------- ------- ---------- --------- -------------------");
+    printf("------ --------- -------- ------------ ------- ---------- --------- ---------");
     
     p = M->Primeiro;
     if (p == NULL) {
@@ -51,7 +51,8 @@ void consultar_movimentacoes(TipoListaMov *M) {
     while (p != NULL) {
         gotoxy(2, lin);
         printf("%-6d", p->conteudo.codigo_movimentacao);
-        
+
+
         gotoxy(9, lin);
         printf("%-9s", p->conteudo.data);
         
@@ -61,18 +62,18 @@ void consultar_movimentacoes(TipoListaMov *M) {
         gotoxy(28, lin);
         printf("%-14s", p->conteudo.tipo_movimentacao);
         
-        gotoxy(43, lin);
+        gotoxy(41, lin);
         printf("%-7d", p->conteudo.codigo_conta_origem);
         
         if (strcmp(p->conteudo.tipo_movimentacao, "TRANSFERENCIA") == 0) {
-            gotoxy(51, lin);
+            gotoxy(49, lin);
             printf("%-10d", p->conteudo.codigo_conta_destino);
         } else {
-            gotoxy(51, lin);
+            gotoxy(49, lin);
             printf("%-10s", "-");
         }
         
-        gotoxy(62, lin);
+        gotoxy(59, lin);
         printf("%9.2f", p->conteudo.valor);
         
         gotoxy(72, lin);
@@ -109,26 +110,33 @@ void consultar_movimentacoes(TipoListaMov *M) {
             gotoxy(20, 3);
             printf("CONSULTA DE MOVIMENTACOES BANCARIAS");
             gotoxy(2, 5);
-            printf("Cod    Data      Hora     Tipo           Origem  Destino    Valor R$  Descricao");
+            printf("Cod    Data      Hora     Tipo         Origem  Destino    Valor R$  Descricao");
             gotoxy(2, 6);
-            printf("------ --------- -------- -------------- ------- ---------- --------- -------------------");
+            printf("------ --------- -------- ------------ ------- ---------- --------- ---------");
             lin = 7;
         }
-        
+            gotoxy(79, 07);
+            printf("|");
+
+            gotoxy(79, 8);
+            printf("|");
+
+
         p = p->proximo;
     }
+
     
     // Exibe totais na última página
     if (lin <= 19) {
-        gotoxy(8, 21);
+        gotoxy(8, 19);
         printf("Total de movimentacoes: %d", total_movimentacoes);
-        gotoxy(8, 22);
+        gotoxy(8, 20);
         printf("Total de creditos: R$ %.2f", total_creditos);
-        gotoxy(8, 23);
+        gotoxy(8, 21);
         printf("Total de debitos: R$ %.2f", total_debitos);
     }
     
-    gotoxy(8, 24);
+    gotoxy(8, 23);
     printf("Pressione qualquer tecla para voltar ao menu...");
     getch();
 }
