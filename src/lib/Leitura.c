@@ -54,23 +54,103 @@ void ler_dados_conta(conta_bancaria *conta) {
     gotoxy(30, 11);
     ler_string(conta->numero_conta, sizeof(conta->numero_conta));
 
-    // Lê o tipo da conta
+// Mostra as opções de tipo de conta
     gotoxy(30, 13);
-    ler_string(conta->tipo_conta, sizeof(conta->tipo_conta));
+    printf("Opcoes de Tipo de Conta:");
+    gotoxy(35, 14);
+    printf("(1 - Poupanca, 2 - Corrente, 3 - Credito)");
+    gotoxy(35, 15);
+    printf("Escolha o tipo (1-3): ");
+    
+int opcao;
+    do {
+        gotoxy(54, 15);
+        printf("      "); // Limpa entrada anterior
+        gotoxy(54, 15);
+        scanf("%d", &opcao);
+        limpar_buffer();
+    } while (opcao < 1 || opcao > 3);
+
+    // Atribui o tipo de conta baseado na escolha
+    switch(opcao) {
+        case 1:
+            strcpy(conta->tipo_conta, "Poupanca");
+            break;
+        case 2:
+            strcpy(conta->tipo_conta, "Corrente");
+            break;
+        case 3:
+            strcpy(conta->tipo_conta, "Credito");
+            break;
+    }
 
     // Lê o saldo
-    gotoxy(30, 15);
-    scanf("%lf", &conta->vl_saldo);
+    double saldo;
+    do {
+        gotoxy(30, 17);
+        printf("                    "); // Limpa entrada anterior
+        gotoxy(30, 17);
+        if (scanf("%lf", &saldo) != 1 || saldo < 0) {
+            limpar_buffer();
+            gotoxy(40, 17);
+            printf("Valor invalido! Digite um numero positivo.");
+            Sleep(1500); // Espera 1.5 segundos
+            gotoxy(40, 17);
+            printf("                                          "); // Limpa mensagem de erro
+            continue;
+        }
+        break;
+    } while (1);
+    conta->vl_saldo = saldo;
     limpar_buffer();
 
     // Lê o limite
-    gotoxy(30, 17);
-    scanf("%lf", &conta->vl_limite);
+    double limite;
+    do {
+        gotoxy(30, 19);
+        printf("                    "); // Limpa entrada anterior
+        gotoxy(30, 19);
+        if (scanf("%lf", &limite) != 1 || limite < 0) {
+            limpar_buffer();
+            gotoxy(40, 19);
+            printf("Valor invalido! Digite um numero positivo.");
+            Sleep(1500); // Espera 1.5 segundos
+            gotoxy(40, 19);
+            printf("                                          "); // Limpa mensagem de erro
+            continue;
+        }
+        break;
+    } while (1);
+    conta->vl_limite = limite;
     limpar_buffer();
 
     // Lê o status da conta
-    gotoxy(30, 19);
-    ler_string(conta->status, sizeof(conta->status));
+    gotoxy(30, 21);
+    printf("Opcoes de Status:");
+    gotoxy(35, 22);
+    printf("(1 - Ativa, 2 - Inativa)");
+    gotoxy(35, 23);
+    printf("Escolha o status (1-2): ");
+    
+int status_opcao;
+    do {
+        gotoxy(54, 23);
+        printf("      "); // Limpa entrada anterior
+        gotoxy(54, 23);
+        scanf("%d", &status_opcao);
+        limpar_buffer();
+        
+        if (status_opcao < 1 || status_opcao > 2) {
+            gotoxy(40, 23);
+            printf("Opcao invalida! Digite 1 ou 2.");
+            Sleep(1500);
+            gotoxy(40, 23);
+            printf("                              "); // Limpa mensagem de erro
+        }
+    } while (status_opcao < 1 || status_opcao > 2);
+
+    // Atribui o status baseado na escolha
+    strcpy(conta->status, (status_opcao == 1) ? "Ativa" : "Inativa");
 
     // Obtém a data atual para o cadastro da conta
     obter_data_atual(conta->dt_cadastro);

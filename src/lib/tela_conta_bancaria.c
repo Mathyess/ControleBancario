@@ -47,23 +47,22 @@ void tela_conta_bancaria()
     gotoxy(07, 11);
     printf("3- Numero da Conta...: ");
     
-    gotoxy(07, 13);
-    printf("4- Tipo de Conta.....: ");
-    
-    gotoxy(07, 15);
-    printf("5- Saldo.............: ");
+gotoxy(07, 13);
+    printf("4- Tipo de Conta");
     
     gotoxy(07, 17);
-    printf("6- Limite............: ");
+    printf("5- Saldo.............: ");
     
     gotoxy(07, 19);
-    printf("7- Status da Conta...: ");
+    printf("6- Limite............: ");
+    
+    gotoxy(07, 21);
+    printf("7- Status da Conta");
 }
 
 // Função para mostrar os detalhes de uma conta bancária no formulário
 void mostra_conta_form(conta_bancaria conta)
 {
-    
     gotoxy(30, 05);
     printf("%d", conta.codigo_conta);
     
@@ -79,12 +78,12 @@ void mostra_conta_form(conta_bancaria conta)
     gotoxy(30, 13);
     printf("%s", conta.tipo_conta);
     
-    gotoxy(30, 15);
+    gotoxy(30, 17);
     printf("%.2f", conta.vl_saldo);
     
-    gotoxy(30, 17);
+    gotoxy(30, 19);
     printf("%.2f", conta.vl_limite);
     
-    gotoxy(30, 19);
+    gotoxy(30, 21);
     printf("%s", conta.status);
 }

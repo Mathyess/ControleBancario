@@ -41,11 +41,11 @@ void consultar_conta(TipoLista *L)
         gotoxy(60, 03);
         printf("Total Contas.: %d", qtde);
 
-        // Solicita o código da conta
+// Solicita o código da conta
         gotoxy(30, 05);
         printf("Digite o codigo da conta: ");
         scanf("%d", &codigo);
-        getchar();  // Para capturar o ENTER após o código
+        limpar_buffer();  // Usa a função existente para limpar o buffer
 
         // Busca pela conta com o código informado
         p = pesquisa(L, codigo);
@@ -56,13 +56,24 @@ void consultar_conta(TipoLista *L)
             printf("Conta Nao Cadastrada..");
             getch();  // Aguarda interação do usuário
         }
+        else
+        {
+            // Limpa a tela antes de mostrar os dados
+            tela();
+            tela_conta_bancaria();
+            gotoxy(25, 03);
+            printf("CONSULTAR CONTA ESPECIFICA");
+            gotoxy(60, 03);
+            printf("Total Contas.: %d", qtde);
 
-    } while (p == NULL);  // Continua pedindo até encontrar a conta
+            // Exibe os dados da conta encontrada usando o formulário
+            mostra_conta_form(p->conteudo);
 
-    // Exibe os dados da conta encontrada
-    mostra_conta_bancaria(p->conteudo);
-
-    // Pausa a execução para o usuário visualizar os dados
-    gotoxy(10, 23);
-    system("pause");
+            // Pausa a execução para o usuário visualizar os dados
+            gotoxy(10, 23);
+            printf("Pressione qualquer tecla para continuar...");
+            getch();
+            break;  // Sai do loop após mostrar a conta
+        }
+    } while (1);  // Continua pedindo até encontrar a conta
 }
