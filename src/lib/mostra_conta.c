@@ -15,7 +15,7 @@
 void mostra_conta_bancaria(conta_bancaria conta)
 {
     // Exibe os dados da conta nas posições corretas da tela
-// Labels à esquerda
+    // Labels à esquerda
     gotoxy(8, 5);
     printf("Codigo.........: ");
     gotoxy(23, 5);
@@ -42,24 +42,24 @@ void mostra_conta_bancaria(conta_bancaria conta)
     printf("%s", conta.tipo_conta);
     
     // Status e outras informações à direita
-    gotoxy(50, 5);
+    gotoxy(50, 6); // Moved status up
     printf("Status.........: ");
-    gotoxy(65, 5);
+    gotoxy(65, 6);
     printf("%s", conta.status);
     
-    gotoxy(50, 7);
+    gotoxy(50, 8);
     printf("Data Cadastro..: ");
-    gotoxy(65, 7);
+    gotoxy(65, 8);
     printf("%s", conta.dt_cadastro);
     
     // Informações financeiras à esquerda
-    gotoxy(8, 15);
+    gotoxy(8, 10); // Moved balance up
     printf("Saldo..........: ");
-    gotoxy(23, 15);
+    gotoxy(23, 10);
     printf("%.2f", conta.vl_saldo);
     
-    gotoxy(8, 17);
+    gotoxy(8, 12); 
     printf("Limite.........: ");
-    gotoxy(23, 17);
+    gotoxy(23, 12);
     printf("%.2f", conta.vl_limite);
 }

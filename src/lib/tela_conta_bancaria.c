@@ -50,13 +50,13 @@ gotoxy(07, 05);
     gotoxy(07, 13);
     printf("4- Tipo de Conta...: ");
     
-    gotoxy(07, 17);
+    gotoxy(07, 15);
     printf("5- Saldo...........: ");
     
-    gotoxy(07, 19);
+    gotoxy(07, 17);
     printf("6- Limite..........: ");
     
-    gotoxy(07, 21);
+    gotoxy(07, 19);
     printf("7- Status..........: ");
 }
 
