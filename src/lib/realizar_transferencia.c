@@ -44,12 +44,8 @@ void realizar_transferencia(TipoLista *L, TipoListaMov *M) {
         return;
     }
     
-    // Mostra os dados do cliente e conta de origem
-    gotoxy(8, 10);
-    printf("Cliente Origem: %s", conta_origem->conteudo.nm_cliente);
-    gotoxy(8, 11);
-    printf("Documento: %s", conta_origem->conteudo.nr_documento);
-    mostra_conta_bancaria(conta_origem->conteudo.conta_bancaria);
+    // Mostra os dados da conta de origem
+    mostra_conta_bancaria(conta_origem->conteudo);
     
     // Solicita e valida a conta de destino
     gotoxy(8, 12);
@@ -71,17 +67,13 @@ void realizar_transferencia(TipoLista *L, TipoListaMov *M) {
         return;
     }
     
-    // Mostra os dados do cliente e conta de destino
-    gotoxy(50, 10);
-    printf("Cliente Destino: %s", conta_destino->conteudo.nm_cliente);
-    gotoxy(50, 11);
-    printf("Documento: %s", conta_destino->conteudo.nr_documento);
+    // Mostra os dados da conta de destino
     gotoxy(50, 12);
-    printf("Banco: %s", conta_destino->conteudo.conta_bancaria.banco);
+    printf("Banco: %s", conta_destino->conteudo.banco);
     gotoxy(50, 13);
-    printf("Agencia: %s", conta_destino->conteudo.conta_bancaria.agencia);
+    printf("Agencia: %s", conta_destino->conteudo.agencia);
     gotoxy(50, 14);
-    printf("Conta: %s", conta_destino->conteudo.conta_bancaria.numero_conta);
+    printf("Conta: %s", conta_destino->conteudo.numero_conta);
     
     // Solicita o valor da transferência
     gotoxy(8, 15);
@@ -97,7 +89,7 @@ void realizar_transferencia(TipoLista *L, TipoListaMov *M) {
     }
     
     // Verifica se há saldo suficiente (considerando o limite)
-    double saldo_disponivel = conta_origem->conteudo.conta_bancaria.vl_saldo + conta_origem->conteudo.conta_bancaria.vl_limite;
+    double saldo_disponivel = conta_origem->conteudo.vl_saldo + conta_origem->conteudo.vl_limite;
     if (valor > saldo_disponivel) {
         gotoxy(8, 23);
         printf("Saldo e limite insuficientes!");
@@ -147,33 +139,33 @@ void realizar_transferencia(TipoLista *L, TipoListaMov *M) {
     double valor_do_saldo = 0;
     double valor_do_limite = 0;
 
-    if (valor <= conta_origem->conteudo.conta_bancaria.vl_saldo) {
+    if (valor <= conta_origem->conteudo.vl_saldo) {
         // Se tem saldo suficiente, debita apenas do saldo
         valor_do_saldo = valor;
     } else {
         // Se não tem saldo suficiente, usa todo o saldo disponível e o restante do limite
-        valor_do_saldo = conta_origem->conteudo.conta_bancaria.vl_saldo;
+        valor_do_saldo = conta_origem->conteudo.vl_saldo;
         valor_do_limite = valor - valor_do_saldo;
     }
 
     // Atualiza o saldo e limite da conta origem
-    conta_origem->conteudo.conta_bancaria.vl_saldo -= valor_do_saldo;
-    conta_origem->conteudo.conta_bancaria.vl_limite -= valor_do_limite;
+    conta_origem->conteudo.vl_saldo -= valor_do_saldo;
+    conta_origem->conteudo.vl_limite -= valor_do_limite;
 
     // Verifica se há limite de crédito a ser restaurado na conta destino
-    double limite_usado = conta_destino->conteudo.conta_bancaria.vl_limite;
+    double limite_usado = conta_destino->conteudo.vl_limite;
     if (limite_usado < 0) {  // Se há limite usado (valor negativo)
         double valor_para_limite = valor;
         if (-limite_usado < valor) {  // Se o valor é maior que o limite usado
             valor_para_limite = -limite_usado;  // Restaura apenas o necessário
         }
         // Restaura o limite
-        conta_destino->conteudo.conta_bancaria.vl_limite += valor_para_limite;
+        conta_destino->conteudo.vl_limite += valor_para_limite;
         // O restante vai para o saldo
-        conta_destino->conteudo.conta_bancaria.vl_saldo += (valor - valor_para_limite);
+        conta_destino->conteudo.vl_saldo += (valor - valor_para_limite);
     } else {
         // Se não há limite usado, todo o valor vai para o saldo
-        conta_destino->conteudo.conta_bancaria.vl_saldo += valor;
+        conta_destino->conteudo.vl_saldo += valor;
     }
     
     // Salva as alterações imediatamente

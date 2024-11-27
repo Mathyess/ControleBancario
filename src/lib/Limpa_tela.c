@@ -30,8 +30,8 @@ TipoApontador pesquisa(TipoLista *L, int codigo) {
     }
 
     TipoApontador p = L->Primeiro;  // Começa do início da lista
-    while (p != NULL) {  // Percorre a lista
-if (p->conteudo.conta_bancaria.codigo_conta == codigo) {  // Se o código da conta for igual
+while (p != NULL) {  // Percorre a lista
+        if (p->conteudo.codigo_conta == codigo) {  // Se o código da conta for igual
             return p;  // Retorna o ponteiro para o cliente encontrado
         }
         p = p->proximo;  // Vai para o próximo cliente

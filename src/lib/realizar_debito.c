@@ -44,14 +44,8 @@ void realizar_debito(TipoLista *L, TipoListaMov *M) {
         return;
     }
     
-    // Mostra os dados do cliente e da conta
-    gotoxy(8, 10);
-    printf("Cliente: %s", conta->conteudo.nm_cliente);
-    gotoxy(8, 11);
-    printf("Documento: %s", conta->conteudo.nr_documento);
-    
     // Mostra os dados da conta
-    mostra_conta_bancaria(conta->conteudo.conta_bancaria);
+    mostra_conta_bancaria(conta->conteudo);
     
     // Solicita o valor do débito
     gotoxy(8, 15);
@@ -68,7 +62,7 @@ void realizar_debito(TipoLista *L, TipoListaMov *M) {
     }
 
     // Verifica se há saldo suficiente (considerando o limite)
-    double saldo_disponivel = conta->conteudo.conta_bancaria.vl_saldo + conta->conteudo.conta_bancaria.vl_limite;
+    double saldo_disponivel = conta->conteudo.vl_saldo + conta->conteudo.vl_limite;
     if (valor > saldo_disponivel) {
         gotoxy(8, 23);
         printf("Saldo e limite insuficientes!");
@@ -80,12 +74,12 @@ void realizar_debito(TipoLista *L, TipoListaMov *M) {
     double valor_do_saldo = 0;
     double valor_do_limite = 0;
 
-    if (valor <= conta->conteudo.conta_bancaria.vl_saldo) {
+    if (valor <= conta->conteudo.vl_saldo) {
         // Se tem saldo suficiente, debita apenas do saldo
         valor_do_saldo = valor;
     } else {
         // Se não tem saldo suficiente, usa todo o saldo disponível e o restante do limite
-        valor_do_saldo = conta->conteudo.conta_bancaria.vl_saldo;
+        valor_do_saldo = conta->conteudo.vl_saldo;
         valor_do_limite = valor - valor_do_saldo;
     }
     
@@ -128,8 +122,8 @@ void realizar_debito(TipoLista *L, TipoListaMov *M) {
     }
     
     // Atualiza o saldo e limite da conta
-    conta->conteudo.conta_bancaria.vl_saldo -= valor_do_saldo;
-    conta->conteudo.conta_bancaria.vl_limite -= valor_do_limite;
+    conta->conteudo.vl_saldo -= valor_do_saldo;
+    conta->conteudo.vl_limite -= valor_do_limite;
     
     // Salva as alterações imediatamente
     Salvar(L);

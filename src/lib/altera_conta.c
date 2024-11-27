@@ -30,14 +30,13 @@ void altera_conta(TipoLista *L) {
     p = L->Primeiro;
     if (p == NULL) {
         tela();
-
         gotoxy(8, 23);
         printf("LISTA VAZIA...");
         getch();
         return;
     }
 
-    // Solicita o código do cliente até encontrar um válido
+    // Solicita o código da conta até encontrar um válido
     do {
         tela();
         tela_conta_bancaria();
@@ -58,15 +57,9 @@ void altera_conta(TipoLista *L) {
         }
     } while (p == NULL);
 
-    // Mostra os dados do cliente e da conta
-    gotoxy(7, 5);
-    printf("Cliente: %s", p->conteudo.nm_cliente);
-    gotoxy(7, 6);
-    printf("Documento: %s", p->conteudo.nr_documento);
-    
     // Mostra os dados da conta bancária no formulário
-    mostra_conta_form(p->conteudo.conta_bancaria);
-    reg_conta = p->conteudo.conta_bancaria;
+    mostra_conta_form(p->conteudo);
+    reg_conta = p->conteudo;
 
     // Permite a alteração dos dados da conta
     do {
@@ -150,7 +143,7 @@ void altera_conta(TipoLista *L) {
     resp = ler_inteiro();
 
     if (resp == 1) {
-        p->conteudo.conta_bancaria = reg_conta;
+        p->conteudo = reg_conta;
         
         // Salva as alterações imediatamente
         Salvar(L);

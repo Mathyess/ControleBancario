@@ -37,15 +37,9 @@ void remove_inicio(TipoLista *L)
     tela_conta_bancaria();
     gotoxy(20, 3);
     printf("REMOVER CONTA BANCARIA INICIO");
-
-    // Mostra os detalhes do cliente e da conta
-    gotoxy(7, 5);
-    printf("Cliente: %s", p->conteudo.nm_cliente);
-    gotoxy(7, 6);
-    printf("Documento: %s", p->conteudo.nr_documento);
     
     // Mostra os detalhes da conta bancária
-    mostra_conta_bancaria(p->conteudo.conta_bancaria);
+    mostra_conta_bancaria(p->conteudo);
 
     gotoxy(7, 23);
     printf("Deseja Remover a Conta Bancaria no Inicio (1=Sim; 2=Nao): ");
@@ -71,7 +65,7 @@ void remove_inicio(TipoLista *L)
         gotoxy(7, 23);
         printf("Conta Bancaria Removida com Sucesso.");
         getch();
-        } else {
+    } else {
         gotoxy(7, 23);
         printf("                                                       ");
         gotoxy(7, 23);

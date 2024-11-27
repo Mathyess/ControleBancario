@@ -28,11 +28,11 @@ void consultar_conta(TipoLista *L)
         getch();
         return;
     }
-
+    
     do
     {
         tela();
-        tela_clie();
+        tela_conta_bancaria();
         gotoxy(25, 03);
         printf("CONSULTAR CONTA ESPECIFICA");
 
@@ -60,7 +60,7 @@ void consultar_conta(TipoLista *L)
     } while (p == NULL);  // Continua pedindo até encontrar a conta
 
     // Exibe os dados da conta encontrada
-    mostra_conta_bancaria(p->conteudo.conta_bancaria);
+    mostra_conta_bancaria(p->conteudo);
 
     // Pausa a execução para o usuário visualizar os dados
     gotoxy(10, 23);

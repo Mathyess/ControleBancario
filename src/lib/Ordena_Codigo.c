@@ -18,7 +18,7 @@ void ordena_codigo(TipoLista *L)
     int i;
     int j;
     int qtde;
-    reg_cliente reg;
+    conta_bancaria reg;
     TipoApontador aux1;
     TipoApontador aux2;
 
@@ -40,7 +40,7 @@ void ordena_codigo(TipoLista *L)
         aux2 = aux1->proximo; // Começa do próximo item
         for (j = i + 1; j <= qtde; j++) // Laço interno para comparar os itens
         {
-            if (aux2 != NULL && aux1->conteudo.conta_bancaria.codigo_conta > aux2->conteudo.conta_bancaria.codigo_conta) // Se o código da conta for maior
+            if (aux2 != NULL && aux1->conteudo.codigo_conta > aux2->conteudo.codigo_conta) // Se o código da conta for maior
             {
                 reg = aux1->conteudo; // Armazena o valor de aux1
                 aux1->conteudo = aux2->conteudo; // Troca os dados de aux1 com aux2

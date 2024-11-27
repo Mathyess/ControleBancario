@@ -4,7 +4,7 @@
     Turma: Engenharia de Software 2A
     RA Matheus Alende Pires     168649-2024
     RA Pedro Henrique Pinheiro  179381-2024
-    Objetivo: Função para salvar os dados dos clientes em um arquivo .dat
+    Objetivo: Função para salvar os dados das contas bancárias em um arquivo .dat
 */
 #include <stdio.h>
 #include <string.h>
@@ -13,10 +13,10 @@
 #include <conio.h>
 #include "../include/funcoes.h"
 
-// Função para carregar os dados dos clientes e contas bancárias de um arquivo
+// Função para carregar os dados das contas bancárias de um arquivo
 void carregar(TipoLista *L) {
     FILE *ptr = fopen("Contas.dat", "rb");  // Abre o arquivo no modo binário para leitura
-    reg_cliente reg;  // Estrutura completa do cliente
+    conta_bancaria reg;  // Estrutura da conta bancária
     
     // Inicializa a lista como vazia
     L->Primeiro = NULL;
@@ -34,8 +34,8 @@ void carregar(TipoLista *L) {
         return;
     }
 
-    // Loop para ler os registros completos do arquivo
-    while (fread(&reg, sizeof(reg_cliente), 1, ptr) == 1) {
+    // Loop para ler os registros do arquivo
+    while (fread(&reg, sizeof(conta_bancaria), 1, ptr) == 1) {
         TipoApontador novo = (TipoApontador)malloc(sizeof(TipoItem));  // Aloca um novo item para a lista
         if (novo == NULL) {
             printf("Erro de alocacao de memoria!\n");
@@ -44,7 +44,7 @@ void carregar(TipoLista *L) {
             return;
         }
 
-        novo->conteudo = reg;  // Copia o registro completo (cliente e conta)
+        novo->conteudo = reg;  // Copia o registro da conta
         novo->proximo = NULL;
 
         // Se a lista estiver vazia, o novo item será o primeiro e o último
@@ -60,7 +60,7 @@ void carregar(TipoLista *L) {
     fclose(ptr);  // Fecha o arquivo
 }
 
-// Função para salvar os clientes e contas bancárias em um arquivo
+// Função para salvar as contas bancárias em um arquivo
 void Salvar(TipoLista *L) {
     if (L == NULL) {
         printf("Lista invalida!\n");
@@ -79,8 +79,8 @@ void Salvar(TipoLista *L) {
     size_t registros_escritos = 0;
 
     while (atual != NULL) {
-        // Escreve o registro completo no arquivo (cliente e conta)
-        if (fwrite(&(atual->conteudo), sizeof(reg_cliente), 1, ptr) != 1) {
+        // Escreve o registro da conta no arquivo
+        if (fwrite(&(atual->conteudo), sizeof(conta_bancaria), 1, ptr) != 1) {
             printf("Erro ao escrever no arquivo!\n");
             getch();
             fclose(ptr);

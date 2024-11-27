@@ -47,20 +47,8 @@ typedef struct {
 
 typedef struct TipoItem *TipoApontador;
 
-// Estrutura para Cliente
-typedef struct {
-    char nm_cliente[100];
-    char ds_endereco[100];
-    int nr_numero;
-    char nr_documento[20];
-    char ds_cidade[50];
-    char cd_uf[3];
-    char nr_telefone[20];
-    conta_bancaria conta_bancaria;
-} reg_cliente;
-
 typedef struct TipoItem {
-    reg_cliente conteudo;
+    conta_bancaria conteudo;
     TipoApontador proximo;
 } TipoItem;
 
@@ -71,7 +59,6 @@ typedef struct {
 
 // Funções de interface
 void tela();
-void tela_clie();
 void tela_conta_bancaria();
 void tela_movimentacao();
 void limpa_tela();
@@ -120,7 +107,6 @@ void carregar_movimentacoes(TipoListaMov *M);
 
 // Funções de entrada de dados
 void ler_dados_conta(conta_bancaria *conta);
-void ler_dados_completos(conta_bancaria *conta, reg_cliente *cliente);
 void limpar_buffer();
 void ler_string(char *destino, int tamanho);
 

@@ -44,14 +44,8 @@ void realizar_credito(TipoLista *L, TipoListaMov *M) {
         return;
     }
     
-    // Mostra os dados do cliente e da conta
-    gotoxy(8, 10);
-    printf("Cliente: %s", conta->conteudo.nm_cliente);
-    gotoxy(8, 11);
-    printf("Documento: %s", conta->conteudo.nr_documento);
-    
     // Mostra os dados da conta
-    mostra_conta_bancaria(conta->conteudo.conta_bancaria);
+    mostra_conta_bancaria(conta->conteudo);
     
     // Solicita o valor do crédito
     gotoxy(8, 15);
@@ -105,19 +99,19 @@ void realizar_credito(TipoLista *L, TipoListaMov *M) {
     }
     
     // Verifica se há limite de crédito a ser restaurado
-    double limite_usado = conta->conteudo.conta_bancaria.vl_limite;
+    double limite_usado = conta->conteudo.vl_limite;
     if (limite_usado < 0) {  // Se há limite usado (valor negativo)
         double valor_para_limite = valor;
         if (-limite_usado < valor) {  // Se o valor é maior que o limite usado
             valor_para_limite = -limite_usado;  // Restaura apenas o necessário
         }
         // Restaura o limite
-        conta->conteudo.conta_bancaria.vl_limite += valor_para_limite;
+        conta->conteudo.vl_limite += valor_para_limite;
         // O restante vai para o saldo
-        conta->conteudo.conta_bancaria.vl_saldo += (valor - valor_para_limite);
+        conta->conteudo.vl_saldo += (valor - valor_para_limite);
     } else {
         // Se não há limite usado, todo o valor vai para o saldo
-        conta->conteudo.conta_bancaria.vl_saldo += valor;
+        conta->conteudo.vl_saldo += valor;
     }
     
     // Salva as alterações imediatamente

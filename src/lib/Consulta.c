@@ -27,28 +27,28 @@ void consultar(TipoLista *L)
     }
     else
     {
-        // Percorre a lista e exibe os dados de cada cliente
+        // Percorre a lista e exibe os dados de cada conta
         p = L->Primeiro; // Garantir que começamos do primeiro elemento
         do
         {
-            // Exibe a tela do cliente
+            // Exibe a tela da conta bancária
             tela();
-            tela_clie();
+            tela_conta_bancaria();
 
             // Título da seção
             gotoxy(35, 03);
             printf("CONSULTAR CONTA");
 
             // Mostra o registro da conta atual
-            mostra_conta_bancaria(p->conteudo.conta_bancaria);
+            mostra_conta_bancaria(p->conteudo);
 
             // Pausa para que o usuário veja os dados antes de avançar
             gotoxy(10, 23);
             system("pause");
 
-            // Avança para o próximo cliente
+            // Avança para a próxima conta
             p = p->proximo;
 
-        } while (p != NULL);  // Continua até que todos os clientes sejam exibidos
+        } while (p != NULL);  // Continua até que todas as contas sejam exibidas
     }
 }
