@@ -59,7 +59,7 @@ void realizar_debito(TipoLista *L, TipoListaMov *M) {
     scanf("%lf", &valor);
     getchar(); // Limpa o buffer
     
-// Verifica se o valor é válido
+    // Verifica se o valor é válido
     if (valor <= 0) {
         gotoxy(8, 23);
         printf("Valor invalido!");
@@ -127,7 +127,7 @@ void realizar_debito(TipoLista *L, TipoListaMov *M) {
         M->Ultimo = novo;
     }
     
-// Atualiza o saldo e limite da conta
+    // Atualiza o saldo e limite da conta
     conta->conteudo.conta_bancaria.vl_saldo -= valor_do_saldo;
     conta->conteudo.conta_bancaria.vl_limite -= valor_do_limite;
     

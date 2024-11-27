@@ -128,7 +128,7 @@ void remove_posicao(TipoLista *L)
         gotoxy(7, 23);
         printf("Conta Bancaria Removida com Sucesso.");
         getch();
-    } else {
+        } else {
         gotoxy(7, 23);
         printf("                                                       ");
         gotoxy(7, 23);

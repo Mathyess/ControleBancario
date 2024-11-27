@@ -39,7 +39,7 @@ void consultar(TipoLista *L)
             gotoxy(35, 03);
             printf("CONSULTAR CONTA");
 
-// Mostra o registro da conta atual
+            // Mostra o registro da conta atual
             mostra_conta_bancaria(p->conteudo.conta_bancaria);
 
             // Pausa para que o usuário veja os dados antes de avançar

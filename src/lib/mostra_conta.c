@@ -15,10 +15,10 @@
 void mostra_conta_bancaria(conta_bancaria conta)
 {
     // Exibe os dados da conta nas posições corretas da tela
-gotoxy(30, 5);
+    gotoxy(30, 5);
     printf("Codigo: %d", conta.codigo_conta);
     
-gotoxy(30, 7);
+    gotoxy(30, 7);
     printf("Banco: %s", conta.banco);
     
     gotoxy(30, 9);

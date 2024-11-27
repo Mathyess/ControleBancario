@@ -47,7 +47,7 @@ void menu_contas_bancarias(TipoLista *L) {  // Recebe a lista como parâmetro
 
         // Switch para executar a ação conforme a opção do usuário
         switch (opc) {
-case 1:
+            case 1:
                 cadastrar(L);  // Chama a função de cadastrar no final
                 break;
             case 2:

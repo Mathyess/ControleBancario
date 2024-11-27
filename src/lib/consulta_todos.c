@@ -41,7 +41,7 @@ void consulta_todos(TipoLista *L, char msg[40])
         gotoxy(02, 06);
         printf("------ ------------ ---------- ------------ ----------- ----------- ---------- ------------");
     } else {
-printf("Codigo  Banco         Agencia    Conta         Tipo        Status      Saldo");
+        printf("Codigo  Banco         Agencia    Conta         Tipo        Status      Saldo");
         gotoxy(02, 06);
         printf("------ ------------ ---------- ------------ ----------- ---------- ------------");
     }
@@ -86,7 +86,7 @@ printf("Codigo  Banco         Agencia    Conta         Tipo        Status      S
                 gotoxy(80, lin);
                 printf("%10.2f", disponivel);
             } else {
-// Relatório padrão ou de inativas
+                // Relatório padrão ou de inativas
                 gotoxy(02, lin);
                 printf("%-6d", p->conteudo.conta_bancaria.codigo_conta);
                 gotoxy(9, lin);
@@ -122,7 +122,7 @@ printf("Codigo  Banco         Agencia    Conta         Tipo        Status      S
                     printf("Codigo  Banco         Agencia    Conta         Tipo        Limite      Saldo     Disponivel");
                     gotoxy(02, 06);
                     printf("------ ------------ ---------- ------------ ----------- ----------- ---------- ------------");
-} else {
+                    } else {
                     printf("Codigo  Banco         Agencia    Conta         Tipo        Status      Saldo");
                     gotoxy(02, 06);
                     printf("------ ------------ ---------- ------------ ----------- ---------- ------------");

@@ -59,7 +59,7 @@ void consultar_conta(TipoLista *L)
 
     } while (p == NULL);  // Continua pedindo até encontrar a conta
 
-// Exibe os dados da conta encontrada
+    // Exibe os dados da conta encontrada
     mostra_conta_bancaria(p->conteudo.conta_bancaria);
 
     // Pausa a execução para o usuário visualizar os dados

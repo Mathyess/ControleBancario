@@ -104,7 +104,7 @@ void realizar_credito(TipoLista *L, TipoListaMov *M) {
         M->Ultimo = novo;
     }
     
-// Verifica se há limite de crédito a ser restaurado
+    // Verifica se há limite de crédito a ser restaurado
     double limite_usado = conta->conteudo.conta_bancaria.vl_limite;
     if (limite_usado < 0) {  // Se há limite usado (valor negativo)
         double valor_para_limite = valor;

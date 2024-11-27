@@ -33,7 +33,7 @@ void menu_consultar(TipoLista *L)
         printf("SUBMENU CONSULTA");
         
         gotoxy(25, 8);
-printf("1 - Consultar Todas as Contas");
+        printf("1 - Consultar Todas as Contas");
         gotoxy(25, 10);
         printf("2 - Consultar Contas por Ordem de Codigo");
         gotoxy(25, 12);
@@ -61,7 +61,7 @@ printf("1 - Consultar Todas as Contas");
         
         switch (opc)
         {
-case 1:
+        case 1:
             consultar(L);
             break;
         case 2:

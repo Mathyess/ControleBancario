@@ -54,7 +54,7 @@ TipoApontador p;
         }
     } while (aux1 != NULL);
 
-// Leitura dos dados da conta
+        // Leitura dos dados da conta
         ler_dados_conta(&nova_conta);
         obter_data_atual(nova_conta.dt_cadastro);
 
@@ -74,7 +74,7 @@ TipoApontador p;
                 return;
             }
 
-// Atualiza a lista com o novo nó
+            // Atualiza a lista com o novo nó
             p->conteudo.conta_bancaria = nova_conta;
             // Inicializa outros campos do reg_cliente
             strcpy(p->conteudo.nm_cliente, "");

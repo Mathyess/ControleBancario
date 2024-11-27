@@ -64,7 +64,7 @@ void altera_conta(TipoLista *L) {
     gotoxy(7, 6);
     printf("Documento: %s", p->conteudo.nr_documento);
     
-// Mostra os dados da conta bancária no formulário
+    // Mostra os dados da conta bancária no formulário
     mostra_conta_form(p->conteudo.conta_bancaria);
     reg_conta = p->conteudo.conta_bancaria;
 
@@ -137,7 +137,7 @@ void altera_conta(TipoLista *L) {
         }
 
         if (campo != 0) {
-// Atualiza a exibição após cada alteração
+            // Atualiza a exibição após cada alteração
             mostra_conta_form(reg_conta);
         }
     } while (campo != 0);

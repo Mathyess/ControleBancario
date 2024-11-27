@@ -67,7 +67,7 @@ void cadastrar(TipoLista *L) {
             return;
         }
 
-// Atribui os dados da conta
+        // Atribui os dados da conta
         p->conteudo.conta_bancaria = nova_conta;
         // Inicializa outros campos do reg_cliente
         strcpy(p->conteudo.nm_cliente, "");

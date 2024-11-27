@@ -113,6 +113,6 @@ void ler_dados_completos(conta_bancaria *conta, reg_cliente *cliente) {
     gotoxy(30, 19);
     ler_string(cliente->nr_telefone, sizeof(cliente->nr_telefone));
 
-// Obtém a data atual para o cadastro da conta
+    // Obtém a data atual para o cadastro da conta
     obter_data_atual(conta->dt_cadastro);
 }

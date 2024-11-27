@@ -143,7 +143,7 @@ void realizar_transferencia(TipoLista *L, TipoListaMov *M) {
         M->Ultimo = novo;
     }
     
-// Calcula quanto será debitado do saldo e quanto do limite da conta origem
+    // Calcula quanto será debitado do saldo e quanto do limite da conta origem
     double valor_do_saldo = 0;
     double valor_do_limite = 0;
 
