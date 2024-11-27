@@ -39,11 +39,11 @@ void consultar_conta(TipoLista *L)
         // Exibe o total de contas cadastradas
         qtde = conta_elementos(L);
         gotoxy(60, 03);
-        printf("Total Contas.: %d", qtde);
+        printf("Total de Contas: %d", qtde);
 
-    // Solicita o código da conta
-        gotoxy(30, 05);
-        printf("Digite o codigo da conta: ");
+        // Solicita o código da conta
+        gotoxy(8, 05);
+        printf("Digite o codigo.........: ");
         scanf("%d", &codigo);
         limpar_buffer();  // Usa a função existente para limpar o buffer
 
@@ -64,7 +64,7 @@ void consultar_conta(TipoLista *L)
             gotoxy(25, 03);
             printf("CONSULTAR CONTA ESPECIFICA");
             gotoxy(60, 03);
-            printf("Total Contas.: %d", qtde);
+            printf("Total de Contas: %d", qtde);
 
             // Exibe os dados da conta encontrada usando o formulário
             mostra_conta_form(p->conteudo);

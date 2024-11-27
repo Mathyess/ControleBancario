@@ -15,8 +15,10 @@
 #include "../include/funcoes.h"
 
 void realizar_debito(TipoLista *L, TipoListaMov *M) {
-    int codigo_conta;
+int codigo_conta;
     double valor;
+    double valor_do_saldo = 0;
+    double valor_do_limite = 0;
     char descricao[100];
     char data[11], hora[9];
     TipoApontador conta;
@@ -47,8 +49,8 @@ void realizar_debito(TipoLista *L, TipoListaMov *M) {
     // Mostra os dados da conta
     mostra_conta_bancaria(conta->conteudo);
     
-    // Solicita o valor do débito
-    gotoxy(8, 15);
+// Solicita o valor do débito
+    gotoxy(8, 19);
     printf("Digite o valor do debito: R$ ");
     scanf("%lf", &valor);
     getchar(); // Limpa o buffer
@@ -61,30 +63,20 @@ void realizar_debito(TipoLista *L, TipoListaMov *M) {
         return;
     }
 
-    // Verifica se há saldo suficiente (considerando o limite)
-    double saldo_disponivel = conta->conteudo.vl_saldo + conta->conteudo.vl_limite;
-    if (valor > saldo_disponivel) {
+// Para débito, só pode usar o saldo disponível
+    if (valor > conta->conteudo.vl_saldo) {
         gotoxy(8, 23);
-        printf("Saldo e limite insuficientes!");
+        printf("Saldo insuficiente para debito!");
         getch();
         return;
     }
-
-    // Calcula quanto será debitado do saldo e quanto do limite
-    double valor_do_saldo = 0;
-    double valor_do_limite = 0;
-
-    if (valor <= conta->conteudo.vl_saldo) {
-        // Se tem saldo suficiente, debita apenas do saldo
-        valor_do_saldo = valor;
-    } else {
-        // Se não tem saldo suficiente, usa todo o saldo disponível e o restante do limite
-        valor_do_saldo = conta->conteudo.vl_saldo;
-        valor_do_limite = valor - valor_do_saldo;
-    }
     
-    // Solicita a descrição da operação
-    gotoxy(8, 17);
+    // Usa apenas o saldo
+    valor_do_saldo = valor;
+    valor_do_limite = 0;
+    
+// Solicita a descrição da operação
+    gotoxy(8, 21);
     printf("Digite a descricao: ");
     fgets(descricao, sizeof(descricao), stdin);
     descricao[strcspn(descricao, "\n")] = 0;

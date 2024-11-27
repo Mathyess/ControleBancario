@@ -47,8 +47,8 @@ void realizar_credito(TipoLista *L, TipoListaMov *M) {
     // Mostra os dados da conta
     mostra_conta_bancaria(conta->conteudo);
     
-    // Solicita o valor do crédito
-    gotoxy(8, 15);
+// Solicita o valor do crédito
+    gotoxy(8, 19);
     printf("Digite o valor do credito: R$ ");
     scanf("%lf", &valor);
     getchar(); // Limpa o buffer
@@ -61,7 +61,7 @@ void realizar_credito(TipoLista *L, TipoListaMov *M) {
     }
     
     // Solicita a descrição da operação
-    gotoxy(8, 17);
+    gotoxy(8, 21);
     printf("Digite a descricao: ");
     fgets(descricao, sizeof(descricao), stdin);
     descricao[strcspn(descricao, "\n")] = 0;
@@ -98,21 +98,24 @@ void realizar_credito(TipoLista *L, TipoListaMov *M) {
         M->Ultimo = novo;
     }
     
-    // Verifica se há limite de crédito a ser restaurado
-    double limite_usado = conta->conteudo.vl_limite;
-    if (limite_usado < 0) {  // Se há limite usado (valor negativo)
-        double valor_para_limite = valor;
-        if (-limite_usado < valor) {  // Se o valor é maior que o limite usado
-            valor_para_limite = -limite_usado;  // Restaura apenas o necessário
-        }
-        // Restaura o limite
-        conta->conteudo.vl_limite += valor_para_limite;
-        // O restante vai para o saldo
-        conta->conteudo.vl_saldo += (valor - valor_para_limite);
-    } else {
-        // Se não há limite usado, todo o valor vai para o saldo
-        conta->conteudo.vl_saldo += valor;
+// Verifica se a conta tem limite de crédito
+    if (conta->conteudo.vl_limite <= 0) {
+        gotoxy(8, 23);
+        printf("Conta sem limite de credito disponivel!");
+        getch();
+        return;
     }
+
+    // Verifica se tem limite suficiente
+    if (valor > conta->conteudo.vl_limite) {
+        gotoxy(8, 23);
+        printf("Limite de credito insuficiente!");
+        getch();
+        return;
+    }
+
+    // Usa apenas o limite de crédito
+    conta->conteudo.vl_limite -= valor;
     
 // Atualiza o status da conta para ativa
     strcpy(conta->conteudo.status, "ATIVA");

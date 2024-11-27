@@ -36,14 +36,14 @@ void consulta_todos(TipoLista *L, char msg[40])
 
     // Exibe o cabeçalho da tabela com informações da conta bancária
     gotoxy(02, 05);
-    if (is_limit_report) {
+if (is_limit_report) {
         printf("Codigo  Banco         Agencia    Conta         Tipo        Limite      Saldo     Disponivel");
         gotoxy(02, 06);
         printf("------ ------------ ---------- ------------ ----------- ----------- ---------- ------------");
     } else {
-        printf("Codigo  Banco         Agencia    Conta         Tipo        Status      Saldo");
+        printf("Codigo  1-Banco......  2-Agencia...  3-Conta.....  4-Tipo.....  5-Status...  Saldo");
         gotoxy(02, 06);
-        printf("------ ------------ ---------- ------------ ----------- ---------- ------------");
+        printf("------ ------------- ------------ ------------ ----------- ----------- ------------");
     }
 
     // Inicia a busca pela primeira conta na lista
@@ -95,20 +95,20 @@ void consulta_todos(TipoLista *L, char msg[40])
                 gotoxy(80, lin);
                 printf("%10.2f", disponivel);
             } else {
-                // Relatório padrão ou de inativas
-                gotoxy(02, lin);
+// Relatório padrão ou de inativas
+gotoxy(02, lin);
                 printf("%-6d", p->conteudo.codigo_conta);
-                gotoxy(9, lin);
-                printf("%-12s", p->conteudo.banco);
-                gotoxy(22, lin);
-                printf("%-10s", p->conteudo.agencia);
-                gotoxy(33, lin);
+                gotoxy(10, lin);
+                printf("%-13s", p->conteudo.banco);
+                gotoxy(25, lin);
+                printf("%-12s", p->conteudo.agencia);
+                gotoxy(39, lin);
                 printf("%-12s", p->conteudo.numero_conta);
-                gotoxy(46, lin);
+                gotoxy(53, lin);
                 printf("%-11s", p->conteudo.tipo_conta);
-                gotoxy(58, lin);
-                printf("%-10s", p->conteudo.status);
-                gotoxy(69, lin);
+                gotoxy(66, lin);
+                printf("%-11s", p->conteudo.status);
+                gotoxy(79, lin);
                 printf("%10.2f", p->conteudo.vl_saldo);
             }
 
@@ -127,14 +127,14 @@ void consulta_todos(TipoLista *L, char msg[40])
                 printf("%s", msg);
 
                 gotoxy(02, 05);
-                if (is_limit_report) {
+if (is_limit_report) {
                     printf("Codigo  Banco         Agencia    Conta         Tipo        Limite      Saldo     Disponivel");
                     gotoxy(02, 06);
                     printf("------ ------------ ---------- ------------ ----------- ----------- ---------- ------------");
                 } else {
-                    printf("Codigo  Banco         Agencia    Conta         Tipo        Status      Saldo");
+                    printf("Codigo  1-Banco......  2-Agencia...  3-Conta.....  4-Tipo.....  5-Status...  Saldo");
                     gotoxy(02, 06);
-                    printf("------ ------------ ---------- ------------ ----------- ---------- ------------");
+                    printf("------ ------------- ------------ ------------ ----------- ----------- ------------");
                 }
                 
                 lin = 7;
