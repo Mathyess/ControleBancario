@@ -41,7 +41,7 @@ void consultar_conta(TipoLista *L)
         gotoxy(60, 03);
         printf("Total Contas.: %d", qtde);
 
-// Solicita o código da conta
+    // Solicita o código da conta
         gotoxy(30, 05);
         printf("Digite o codigo da conta: ");
         scanf("%d", &codigo);

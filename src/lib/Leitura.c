@@ -128,7 +128,7 @@ int opcao;
     gotoxy(30, 21);
     printf("Opcoes de Status:");
     gotoxy(35, 22);
-    printf("(1 - Ativa, 2 - Inativa)");
+printf("(1 - ATIVA, 2 - INATIVA)");
     gotoxy(35, 23);
     printf("Escolha o status (1-2): ");
     
@@ -149,8 +149,8 @@ int status_opcao;
         }
     } while (status_opcao < 1 || status_opcao > 2);
 
-    // Atribui o status baseado na escolha
-    strcpy(conta->status, (status_opcao == 1) ? "Ativa" : "Inativa");
+// Atribui o status baseado na escolha
+    strcpy(conta->status, (status_opcao == 1) ? "ATIVA" : "INATIVA");
 
     // Obtém a data atual para o cadastro da conta
     obter_data_atual(conta->dt_cadastro);

@@ -148,7 +148,7 @@ void realizar_transferencia(TipoLista *L, TipoListaMov *M) {
         valor_do_limite = valor - valor_do_saldo;
     }
 
-    // Atualiza o saldo e limite da conta origem
+// Atualiza o saldo e limite da conta origem
     conta_origem->conteudo.vl_saldo -= valor_do_saldo;
     conta_origem->conteudo.vl_limite -= valor_do_limite;
 
@@ -167,6 +167,10 @@ void realizar_transferencia(TipoLista *L, TipoListaMov *M) {
         // Se não há limite usado, todo o valor vai para o saldo
         conta_destino->conteudo.vl_saldo += valor;
     }
+    
+    // Atualiza o status das contas para ativa
+    strcpy(conta_origem->conteudo.status, "ATIVA");
+    strcpy(conta_destino->conteudo.status, "ATIVA");
     
     // Salva as alterações imediatamente
     Salvar(L);

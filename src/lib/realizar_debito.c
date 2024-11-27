@@ -121,9 +121,12 @@ void realizar_debito(TipoLista *L, TipoListaMov *M) {
         M->Ultimo = novo;
     }
     
-    // Atualiza o saldo e limite da conta
+// Atualiza o saldo e limite da conta
     conta->conteudo.vl_saldo -= valor_do_saldo;
     conta->conteudo.vl_limite -= valor_do_limite;
+    
+    // Atualiza o status da conta para ativa
+    strcpy(conta->conteudo.status, "ATIVA");
     
     // Salva as alterações imediatamente
     Salvar(L);

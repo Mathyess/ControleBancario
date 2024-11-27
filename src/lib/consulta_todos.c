@@ -60,10 +60,19 @@ void consulta_todos(TipoLista *L, char msg[40])
         // Enquanto houver contas na lista, exibe seus dados
         while (p != NULL)
         {
-            // Se for relatório de inativas, só mostra as inativas
-            if (is_inactive_report && strcmp(p->conteudo.status, "INATIVA") != 0) {
-                p = p->proximo;
-                continue;
+// Se for relatório de inativas, só mostra as inativas
+            if (is_inactive_report) {
+                // Se é relatório de inativas e a conta não é inativa, pula
+                if (strcmp(p->conteudo.status, "INATIVA") != 0) {
+                    p = p->proximo;
+                    continue;
+                }
+            } else {
+                // Se é relatório normal e a conta é inativa, pula
+                if (strcmp(p->conteudo.status, "INATIVA") == 0) {
+                    p = p->proximo;
+                    continue;
+                }
             }
 
             if (is_limit_report) {

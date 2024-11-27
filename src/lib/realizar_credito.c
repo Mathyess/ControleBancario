@@ -114,6 +114,9 @@ void realizar_credito(TipoLista *L, TipoListaMov *M) {
         conta->conteudo.vl_saldo += valor;
     }
     
+// Atualiza o status da conta para ativa
+    strcpy(conta->conteudo.status, "ATIVA");
+    
     // Salva as alterações imediatamente
     Salvar(L);
     salvar_movimentacoes(M);
