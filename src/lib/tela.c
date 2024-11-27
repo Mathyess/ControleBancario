@@ -44,6 +44,8 @@ void tela()
     printf("| UNICV");
     gotoxy(60, 02);
     printf("Estrutura de Dados |");
+    gotoxy(62, 03);
+    printf("Matheus & Pedro");
     gotoxy(01, 03);
     printf("|");
 
