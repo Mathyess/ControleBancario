@@ -54,15 +54,15 @@ void ler_dados_conta(conta_bancaria *conta) {
     gotoxy(30, 11);
     ler_string(conta->numero_conta, sizeof(conta->numero_conta));
 
-// Mostra as opções de tipo de conta
+    // Mostra as opções de tipo de conta
     gotoxy(30, 13);
     printf("Opcoes de Tipo de Conta:");
-    gotoxy(35, 14);
-    printf("(1 - Poupanca, 2 - Corrente, 3 - Credito)");
-    gotoxy(35, 15);
+    gotoxy(30, 14);
+    printf("(1 - Poupanca, 2 - Corrente, 3 - Credito)\n");
+    gotoxy(30, 15);
     printf("Escolha o tipo (1-3): ");
     
-int opcao;
+    int opcao;
     do {
         gotoxy(54, 15);
         printf("      "); // Limpa entrada anterior
@@ -126,11 +126,8 @@ int opcao;
 
     // Lê o status da conta
     gotoxy(30, 21);
-    printf("Opcoes de Status:");
-    gotoxy(35, 22);
-printf("(1 - ATIVA, 2 - INATIVA)");
-    gotoxy(35, 23);
-    printf("Escolha o status (1-2): ");
+    printf("(1-ATIVA 2-INATIVA - Escolha o status 1-2)");
+
     
 int status_opcao;
     do {
@@ -149,7 +146,7 @@ int status_opcao;
         }
     } while (status_opcao < 1 || status_opcao > 2);
 
-// Atribui o status baseado na escolha
+    // Atribui o status baseado na escolha
     strcpy(conta->status, (status_opcao == 1) ? "ATIVA" : "INATIVA");
 
     // Obtém a data atual para o cadastro da conta
